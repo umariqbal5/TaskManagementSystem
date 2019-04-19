@@ -32,3 +32,5 @@ package-lock.json
 .idea/workspace.xml
 target/WAPTasksProject.war
 .idea/workspace.xml
+target/WAPTasksProject/home.html
+.idea/workspace.xml
