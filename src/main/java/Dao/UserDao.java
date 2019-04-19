@@ -1,0 +1,69 @@
+package Dao;
+
+import Config.Mysql;
+import Model.Role;
+import Model.User;
+
+import java.sql.*;
+
+public class UserDao {
+    public void saveUser(User user) throws ClassNotFoundException, SQLException {
+        String query = "INSERT INTO USER"
+                + "(USERID, USERNAME, PASSWORD, FULLNAME, STATE, CITY, STREET, ZIPCODE, EMAIL, ROLE) VALUES"
+                + "(?,?,?,?,?,?,?,?,?,?)";
+
+        try (Connection connection = Mysql.getMysqlConnection()) {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, 0);
+            ps.setString(2, user.getUserName());
+            ps.setString(3, user.getPassWord());
+            ps.setString(4, user.getFullName());
+            ps.setString(5, user.getState());
+            ps.setString(6, user.getCity());
+            ps.setString(7, user.getStreet());
+            ps.setInt(8, user.getZipCode() == null ? 0 : user.getZipCode());
+            ps.setString(9, user.getEmail());
+            ps.setString(10, user.getRole());
+            ps.executeUpdate();
+
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println("Exception thrown in save User " + user.getUserName());
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    public User getUser(String userName) {
+        String query = "SELECT * from USER where username = '" + userName + "';";
+        User user = null;
+        try (Connection con = Mysql.getMysqlConnection(); Statement stmt = con.createStatement()) {
+            System.out.println("the query: " + query);
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                userName = rs.getString("USERNAME");
+                String password = rs.getString("PASSWORD");
+                String fullName = rs.getString("FULLNAME");
+                String gender = rs.getString("GENDER");
+                String state = rs.getString("STATE");
+                String city = rs.getString("CITY");
+                String street = rs.getString("STREET");
+                Integer zipcode = rs.getInt("ZIPCODE");
+                Date birthDate = rs.getDate("BIRTHDATE");
+                String email = rs.getString("EMAIL");
+                String role = rs.getString("ROLE");
+
+                user = new User(userName, password, email, fullName, role, state, city, street, zipcode);
+                user.setUserId(rs.getInt("USERID"));
+            }
+            stmt.close();
+        } catch (SQLException s) {
+            System.out.println("Exception thrown in retrieveUser ....");
+            s.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        return user;
+    }
+}

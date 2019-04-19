@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -30,16 +29,16 @@
       <div class="login_wrapper">
         <div class="animate form login_form">
           <section class="login_content">
-            <form>
+            <form action="login" method="post">
               <h1>Login Form</h1>
               <div>
-                <input type="text" class="form-control" placeholder="Username" required="" />
+                <input name="userName" type="text" class="form-control" placeholder="Username" required="" />
               </div>
               <div>
-                <input type="password" class="form-control" placeholder="Password" required="" />
+                <input name="password" type="password" class="form-control" placeholder="Password" required="" />
               </div>
               <div>
-                <a class="btn btn-default submit" href="home.html">Log in</a>
+                <input style="margin-left: 140px" class="btn btn-default submit" type="submit" value="Login">
                 <a class="reset_pass" href="#">Lost your password?</a>
               </div>
 
@@ -64,19 +63,27 @@
 
         <div id="register" class="animate form registration_form">
           <section class="login_content">
-            <form>
+            <form action="createUser" method="post">
               <h1>Create Account</h1>
               <div>
-                <input type="text" class="form-control" placeholder="Username" required="" />
+                <input name="userName" type="text" class="form-control" placeholder="Username" required="" />
               </div>
               <div>
-                <input type="email" class="form-control" placeholder="Email" required="" />
+                <input name="email" type="email" class="form-control" placeholder="Email" required="" />
               </div>
               <div>
-                <input type="password" class="form-control" placeholder="Password" required="" />
+                <input name="password" type="password" class="form-control" placeholder="Password" required="" />
               </div>
+                <div>
+                    <select name="role">
+                        <option value="">-- Select Role --</option>
+                        <option value="manager">Manager</option>
+                        <option value="developer">Developer</option>
+                    </select>
+                </div>
               <div>
-                <a class="btn btn-default submit" href="home.html">Submit</a>
+                  <br>
+                <input style="margin-left: 128px" class="btn btn-default submit" value="Create User" type="submit">
               </div>
 
               <div class="clearfix"></div>
