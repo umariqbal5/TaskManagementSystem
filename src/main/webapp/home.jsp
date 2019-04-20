@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Tasks2 </title>
+  <title>Tasks </title>
 
   <!-- Bootstrap -->
   <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -413,12 +414,7 @@
       <!-- /page content -->
 
       <!-- footer content -->
-      <footer>
-        <div class="pull-right">
-          WAP - Project by <b>TheCoder$</b>
-        </div>
-        <div class="clearfix"></div>
-      </footer>
+      <jsp:include page="WEB-INF/footer.jsp"></jsp:include>
       <!-- /footer content -->
     </div>
   </div>

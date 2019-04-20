@@ -34,13 +34,13 @@ public class UserLogin extends HttpServlet {
             newSession.setMaxInactiveInterval(5*60);
             Cookie cookie = new Cookie("loginUser", userName);
             response.addCookie(cookie);
-//            request.getRequestDispatcher("home.html").forward(request, response);
+//            request.getRequestDispatcher("home.jsp").forward(request, response);
             response.sendRedirect(request.getContextPath() + "/login");
         }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //        doPost(request,response);
-        request.getRequestDispatcher("home.html").forward(request, response);
+        request.getRequestDispatcher("home.jsp").forward(request, response);
     }
 }

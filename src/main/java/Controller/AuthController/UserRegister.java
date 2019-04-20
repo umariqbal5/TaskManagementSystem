@@ -33,7 +33,7 @@ public class UserRegister extends HttpServlet {
             e.printStackTrace();
         }
         System.out.println("Created user " + userName);
-        request.getRequestDispatcher("home.html").forward(request, response);
+        request.getRequestDispatcher("home.jsp").forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
