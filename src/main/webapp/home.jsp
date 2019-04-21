@@ -90,6 +90,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
+                      <input type="hidden" id="id"/>
                         <input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="Task Name" required="required" type="text">
                       </div>
                     </div>
@@ -98,9 +99,8 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Category <span class="required">*</span></label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <select class="form-control" id="category">
-                          <option>Choose option</option>
                           <option value="personal">Personal</option>
-                          <option value="work">Work</option>
+                          <option value="work" selected>Work</option>
                         </select>
                       </div>
                     </div>
@@ -109,10 +109,9 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Priority <span class="required">*</span></label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <select class="form-control" id="priority">
-                          <option>Choose option</option>
                           <option value="3">High</option>
-                          <option value="2">Midium</option>
-                          <option value="1">Low</option>
+                          <option value="2">Medium</option>
+                          <option value="1" selected>Low</option>
                         </select>
                       </div>
                     </div>
@@ -140,7 +139,7 @@
                     </div>
 
                     <div class="item form-group">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Required By <span class="required"> *</span>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Due Date <span class="required"> *</span>
                       </label>
                       <div class='col-md-6 col-sm-6 col-xs-12 input-group date' id='myDatepicker'>
                         <input type='text' class="form-control" id="duedate"/>
@@ -153,7 +152,7 @@
                     <div class="ln_solid"></div>
                     <div class="form-group">
                       <div class="col-md-6 col-md-offset-3">
-                        <button type="submit" class="btn btn-primary">Clear</button>
+                        <button id="cancel" type="button" class="btn btn-primary">Clear</button>
                         <button id="save" type="button" class="btn btn-success">Save</button>
                       </div>
                     </div>
@@ -182,87 +181,7 @@
                     </tr>
                     </thead>
                     <tbody id="tableTask">
-                    <%--<tr>--%>
-                      <%--<td>Tiger</td>--%>
-                      <%--<td>2011/04/25</td>--%>
-                      <%--<td>Personal</td>--%>
-                      <%--<td>--%>
-                        <%--<button type="button" class="btn btn-success btn-xs">Success</button>--%>
-                      <%--</td>--%>
-                      <%--<td>High</td>--%>
-                      <%--<td>Umar</td>--%>
-                      <%--<td></td>--%>
-                      <%--<td>--%>
-                        <%--<!-- <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a> -->--%>
-                        <%--<a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>--%>
-                        <%--<a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>--%>
-                      <%--</td>--%>
-                    <%--</tr>--%>
-                    <%--<tr>--%>
-                      <%--<td>Garrett</td>--%>
-                      <%--<td>2011/07/25</td>--%>
-                      <%--<td>Work</td>--%>
-                      <%--<td>--%>
-                        <%--<button type="button" class="btn btn-success btn-xs">Success</button>--%>
-                      <%--</td>--%>
-                      <%--<td>High</td>--%>
-                      <%--<td>Umar</td>--%>
-                      <%--<td></td>--%>
-                      <%--<td>--%>
-                        <%--<!-- <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a> -->--%>
-                        <%--<a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>--%>
-                        <%--<a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>--%>
-                      <%--</td>--%>
-                    <%--</tr>--%>
-                    <%--<tr>--%>
-                      <%--<td>Ashton</td>--%>
-                      <%--<td>2009/01/12</td>--%>
-                      <%--<td>Personal</td>--%>
-                      <%--<td>--%>
-                        <%--<button type="button" class="btn btn-success btn-xs">Success</button>--%>
-                      <%--</td>--%>
-                      <%--<td>High</td>--%>
-                      <%--<td>Umar</td>--%>
-                      <%--<td></td>--%>
-                      <%--<td>--%>
-                        <%--<!-- <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a> -->--%>
-                        <%--<a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>--%>
-                        <%--<a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>--%>
-                      <%--</td>--%>
-                    <%--</tr>--%>
-                    <%--<tr>--%>
-                      <%--<td>Cedric</td>--%>
-                      <%--<td>2012/03/29</td>--%>
-                      <%--<td>Personal</td>--%>
-                      <%--<td>--%>
-                        <%--<button type="button" class="btn btn-success btn-xs">Success</button>--%>
-                      <%--</td>--%>
-                      <%--<td>High</td>--%>
-                      <%--<td>Umar</td>--%>
-                      <%--<td></td>--%>
-                      <%--<td>--%>
-                        <%--<!-- <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a> -->--%>
-                        <%--<a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>--%>
-                        <%--<a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>--%>
-                      <%--</td>--%>
-                    <%--</tr>--%>
-                    <%--<tr>--%>
-                      <%--<td>Airi</td>--%>
-                      <%--<td>2008/11/28</td>--%>
-                      <%--<td>Personal</td>--%>
-                      <%--<td>--%>
-                        <%--<button type="button" class="btn btn-success btn-xs">Success</button>--%>
-                      <%--</td>--%>
-                      <%--<td>Low</td>--%>
-                      <%--<td></td>--%>
-                      <%--<td>Backend Developers</td>--%>
-                      <%--<td>--%>
-                        <%--<!-- <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a> -->--%>
-                        <%--<a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>--%>
-                        <%--<a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>--%>
-                      <%--</td>--%>
-                    <%--</tr>--%>
-
+                   
                     </tbody>
                   </table>
 

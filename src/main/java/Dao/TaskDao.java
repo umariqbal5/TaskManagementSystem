@@ -75,4 +75,30 @@ public class TaskDao {
         }
         return tasksList;
     }
+    
+    public void updateTask(Task task) throws ClassNotFoundException, SQLException {
+        String query = "UPDATE TASK SET NAME=?"
+        		+ ",CATEGORY=?,PRIORITY=?,DUEDATE=?,ASSIGNTO=?,ASSIGNTEAM=? WHERE TASKID=?";
+
+
+        try (Connection connection = Mysql.getMysqlConnection()) {
+            PreparedStatement ps = connection.prepareStatement(query);
+           
+            ps.setString(1, task.getName());
+            ps.setString(2, task.getCategory());
+            ps.setString(3, task.getPriority());
+            ps.setString(4, task.getDueDate());
+            ps.setString(5, task.getAssignedTo());
+            ps.setString(6, task.getAssignedToTeam());
+            ps.setInt(7, Integer.valueOf(task.getTaskID()));
+           int res = ps.executeUpdate();
+
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println("Exception thrown in save Task " + task.getName());
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
 }
