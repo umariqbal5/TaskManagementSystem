@@ -77,21 +77,20 @@ public class TaskDao {
     }
     
     public void updateTask(Task task) throws ClassNotFoundException, SQLException {
-        String query = "INSERT INTO TASK"
-                + "(TASKID, NAME, CATEGORY, PRIORITY, DUEDATE, STATUS, ASSIGNTO, ASSIGNTEAM) VALUES"
-                + "(?,?,?,?,?,?,?,?)";
+        String query = "UPDATE TASK SET NAME=?"
+        		+ ",CATEGORY=?,PRIORITY=?,DUEDATE=?,ASSIGNTO=?,ASSIGNTEAM=? WHERE TASKID=?";
 
 
         try (Connection connection = Mysql.getMysqlConnection()) {
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setInt(1, 0);
-            ps.setString(2, task.getName());
-            ps.setString(3, task.getCategory());
-            ps.setString(4, task.getPriority());
-            ps.setString(5, task.getDueDate());
-            ps.setString(6, task.getStatus());
-            ps.setString(7, task.getAssignedTo());
-            ps.setString(8, task.getAssignedToTeam());
+           
+            ps.setString(1, task.getName());
+            ps.setString(2, task.getCategory());
+            ps.setString(3, task.getPriority());
+            ps.setString(4, task.getDueDate());
+            ps.setString(5, task.getAssignedTo());
+            ps.setString(6, task.getAssignedToTeam());
+            ps.setInt(7, Integer.valueOf(task.getTaskID()));
            int res = ps.executeUpdate();
 
             ps.close();
