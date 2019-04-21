@@ -30,10 +30,7 @@
   <link href="vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 
   <!-- PNotify -->
-  <link href="vendors/pnotify/dist/pnotify.css" rel="stylesheet">
-  <link href="vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
-  <link href="vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
-
+  <link href="vendors/pnotify/pnotify.custom.min.css" media="all" rel="stylesheet" type="text/css" />
 
   <!-- Custom Theme Style -->
   <link href="build/css/custom.min.css" rel="stylesheet">
@@ -120,7 +117,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Assign to</label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <select class="form-control" id="user">
-                          <option>Select User</option>
+                          <option value="" sel>Select User</option>
                           <option value="user1">User1</option>
                           <option value="user2">User2</option>
                         </select>
@@ -131,7 +128,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Assign to Team</label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <select class="form-control" id="team">
-                          <option>Select Team</option>
+                          <option value="">Select Team</option>
                           <option value="team2">Team 2</option>
                           <option value="team3">Team 3</option>
                         </select>
@@ -227,9 +224,8 @@
   <script src="vendors/pdfmake/build/pdfmake.min.js"></script>
   <script src="vendors/pdfmake/build/vfs_fonts.js"></script>
   <!-- PNotify -->
-  <script src="vendors/pnotify/dist/pnotify.js" type="5c2ea6151e4c131cbc033947-text/javascript"></script>
-  <script src="vendors/pnotify/dist/pnotify.buttons.js" type="5c2ea6151e4c131cbc033947-text/javascript"></script>
-  <script src="vendors/pnotify/dist/pnotify.nonblock.js" type="5c2ea6151e4c131cbc033947-text/javascript"></script>
+  <script type="text/javascript" src="vendors/pnotify/pnotify.custom.min.js"></script>
+  
   <!-- bootstrap-daterangepicker -->
   <script src="vendors/moment/min/moment.min.js"></script>
   <!-- bootstrap-datetimepicker -->

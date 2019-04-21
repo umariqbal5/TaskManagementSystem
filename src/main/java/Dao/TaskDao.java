@@ -101,4 +101,24 @@ public class TaskDao {
             throw new RuntimeException(e.getMessage());
         }
     }
+    
+    public void deleteTask(int taskId) throws ClassNotFoundException, SQLException {
+        String query = "DELETE FROM TASK WHERE TASKID=?";
+
+
+        try (Connection connection = Mysql.getMysqlConnection()) {
+            PreparedStatement ps = connection.prepareStatement(query);
+           
+            ps.setInt(1, taskId);
+           
+            ps.execute();
+
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println("Exception thrown in delete Task " + taskId);
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
 }
