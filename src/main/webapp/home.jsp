@@ -98,9 +98,8 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Category <span class="required">*</span></label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <select class="form-control" id="category">
-                          <option>Choose option</option>
                           <option value="personal">Personal</option>
-                          <option value="work">Work</option>
+                          <option value="work" selected>Work</option>
                         </select>
                       </div>
                     </div>
@@ -109,10 +108,9 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Priority <span class="required">*</span></label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <select class="form-control" id="priority">
-                          <option>Choose option</option>
                           <option value="3">High</option>
                           <option value="2">Midium</option>
-                          <option value="1">Low</option>
+                          <option value="1" selected>Low</option>
                         </select>
                       </div>
                     </div>
