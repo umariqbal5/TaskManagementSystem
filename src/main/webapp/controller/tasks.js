@@ -5,8 +5,9 @@ $(function() {
     $("#cancel").click(onCancel);
     $("#datatable-responsive2").on('click','.edit',onUpdate);
     $("#datatable-responsive2").on('click','#changestatus',onChangeStatus);
+    $("#datatable-responsive2").on('click','#btnDelete',deleteTask);
     
-
+   
     getTasks();
 });
 
@@ -14,15 +15,15 @@ function addTask(){
 	var id = $("#id").val();
 	
     var name = $("#name").val();
-    var category = $("#category").val();
-    var priority = $("#priority").val();
-    var user = $("#user").val();
-    var team = $("#team").val();
+    var category = $("#category").children("option:selected").val();
+    var priority = $("#priority").children("option:selected").val();
+    var user = $("#user").children("option:selected").val();
+    var team = $("#team").children("option:selected").val();
     var dueDate = $("#duedate").val();
     
     $('#ajax-loader').show();
 
-    if(id){
+    if(!id){
         $.ajax("tasks", {
             "type": "post",
             "data": {
@@ -36,13 +37,13 @@ function addTask(){
         }).done(function (response){
 
             getTasks();
-//            new PNotify({
-//                title: 'Added Successsfully',
-//                text: 'Task Added!',
-//                type: 'success',
-//                styling: 'bootstrap3'
-//            });
-            alert("Added");
+            new PNotify({
+                title: 'Added Successsfully',
+                text: 'Task Added!',
+                type: 'success',
+                styling: 'bootstrap3'
+            });
+            
         }).always(function() {
         	$('#ajax-loader').hide();
         });
@@ -60,7 +61,12 @@ function addTask(){
             }
         }).done(function (response){
             getTasks();
-            alert("Updated");
+            new PNotify({
+                title: 'Updated Successsfully',
+                text: 'Task Updated!',
+                type: 'success',
+                styling: 'bootstrap3'
+            });
         }).always(function() {
         	$('#ajax-loader').hide();
         });
@@ -99,7 +105,7 @@ function getTasks(){
                 +'" data-assignto="'+task.AssignedTo 
                 +'" data-assigntoteam="'+task.AssignedToTeam 
                 +'" class="edit btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </button>\n' +
-                '                        <button type="button" data-id="'+task.TaskID+'" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </button>\n' +
+                '                        <button type="button" data-id="'+task.TaskID+'" id="btnDelete" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </button>\n' +
                 '                        <button type="button" data-id="'+task.TaskID+'" id="changestatus" class="btn btn-warning btn-xs"><i class="fa fa-trash-o"></i> Mark as Done </button>\n' +
                 '                      </td>\n' +
                 '                    </tr>'
@@ -122,7 +128,7 @@ function getAllTeams() {
 
 }
 
-function onUpdate(evt){
+function onUpdate(){
 	let id = $(this).attr("data-id");
 	let name = $(this).attr("data-name");
 	let category = $(this).attr("data-category");
@@ -154,4 +160,33 @@ function onCancel(){
 function onChangeStatus(){
 	let id = $(this).attr("data-id");
 	alert("onChangeStatus Called "+id);
+}
+
+function deleteTask(){
+	let id = $(this).attr("data-id");
+	if(id){
+		if (confirm("Are you sure to delete?")) {
+	        // your deletion code
+			$('#ajax-loader').show();
+			$.ajax("deletetask", {
+	            "type": "post",
+	            "data": {
+	                "Id":id
+	            }
+	        }).done(function (response){
+	            getTasks();
+	            new PNotify({
+	                title: 'Deleted Successsfully',
+	                text: 'Task Delted!',
+	                type: 'warning',
+	                styling: 'bootstrap3'
+	            });
+	        }).fail(function(err){
+	        	console.log(err);
+	        }).always(function() {
+	        	$('#ajax-loader').hide();
+	        });
+	    }
+	    return false;		
+	}
 }
