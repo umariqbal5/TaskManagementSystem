@@ -77,6 +77,7 @@ function getTasks(){
 //        console.log(taskList);
         $("#datatable-responsive2").find('tbody').find("tr").remove();
         $.each(taskList, function(index, task){
+        	
         	let prior = task.Priority==1?"LOW":task.Priority==2?"MEDIUM":"HIGH";
         	$("#datatable-responsive2").find('tbody').append(
                 ' <tr>\n' +
