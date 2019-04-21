@@ -2,6 +2,7 @@
 $(function() {
 	
     $("#save").click(addTask);
+    $("#datatable-responsive2").on('click','.edit',onUpdate);
     
 
     getTasks();
@@ -48,9 +49,10 @@ function getTasks(){
     $.get("tasks").done(function(response){
         var taskList = response;
 
-        console.log(taskList);
+//        console.log(taskList);
         $("#datatable-responsive2").find('tbody').find("tr").remove();
         $.each(taskList, function(index, task){
+        	let prior = task.Priority==1?"LOW":task.Priority==2?"MEDIUM":"HIGH";
         	$("#datatable-responsive2").find('tbody').append(
                 ' <tr>\n' +
                 '                      <td>'+task.Name+'</td>\n' +
@@ -59,11 +61,15 @@ function getTasks(){
                 '                      <td>\n' +
                 '                        <button type="button" class="btn btn-success btn-xs">'+task.Status+'</button>\n' +
                 '                      </td>\n' +
-                '                      <td>'+task.Priority+'</td>\n' +
+                '                      <td><button type="button" class="btn btn-warning btn-xs">'+prior+'</button></td>\n' +
                 '                      <td>'+task.AssignedTo+'</td>\n' +
                 '                      <td>'+task.AssignedToTeam+'</td>\n' +
                 '                      <td>\n' +
-                '                        <a href="#" data-id="'+task.TaskID+'" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>\n' +
+                '                        <button type="button" data-id="'+task.TaskID
+                +'" data-name="'+task.Name
+                +'" data-category="'+task.Category
+                +'" data-priority="'+task.Priority 
+                +'" class="edit btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </button>\n' +
                 '                        <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>\n' +
                 '                      </td>\n' +
                 '                    </tr>'
@@ -84,4 +90,18 @@ function getAllUsers() {
 function getAllTeams() {
     $.get("teams").done();
 
+}
+
+function onUpdate(evt){
+//	alert($(this).attr("data-id"));
+	let name = $(this).attr("data-name");
+	let category = $(this).attr("data-category");
+	let priority = $(this).attr("data-priority");
+	
+	$('#category').val(category);
+	$('#priority').val(priority);
+	$('#name').val(name).focus();
+	
+	
+	
 }
