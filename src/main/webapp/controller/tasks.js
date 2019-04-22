@@ -6,6 +6,7 @@ $(function () {
     $("#datatable-responsive2").on('click', '.edit', onUpdate);
     $("#datatable-responsive2").on('click', '#changestatus', onChangeStatus);
 
+    $("#datatable-responsive2").on('click', '.completed', onMarkDone);
     getTasks();
 });
 
@@ -75,7 +76,7 @@ function getTasks() {
         $("#datatable-responsive2").find('tbody').find("tr").remove();
         $.each(taskList, function (index, task) {
             let diff = onOverDue(task.DueDate);
-            let status = diff == true ? "Over Due" : task.DueDate;
+            let status = diff == true ? "" : "hidden";
             let prior = task.Priority == 1 ? "LOW" : task.Priority == 2 ? "MEDIUM" : "HIGH";
             $("#datatable-responsive2").find('tbody').append(
                 ' <tr>\n' +
@@ -83,7 +84,8 @@ function getTasks() {
                 '                      <td>' + task.DueDate + '</td>\n' +
                 '                      <td>' + task.Category + '</td>\n' +
                 '                      <td>\n' +
-                '                        <button type="button" class="btn btn-success btn-xs">' + status + '</button>\n' +
+                '                        <button type="button" data-id="status" id="status" class="btn btn-success btn-xs">' + task.Status + '</button>\n' +
+                '                        <button type="button" id="complete" class="'+status+' btn btn-warning btn-xs">OVERDUE</button> \n' +
                 '                      </td>\n' +
                 '                      <td><button type="button" class="btn btn-warning btn-xs">' + prior + '</button></td>\n' +
                 '                      <td>' + task.AssignedTo + '</td>\n' +
@@ -158,10 +160,37 @@ function onChangeStatus() {
 
 function onOverDue(due) {
 
-    let currentDate = new Date();
-    let dueDate = Date.parse(due);
+    let q = new Date();
+    let m = q.getMonth() + 1;
+    let d = q.getDay();
+    let y = q.getFullYear();
+    let today = new Date(y, m, d);
+    // let  mydate=new Date('2011-04-11');
 
-    let status = currentDate - dueDate;
-    return status > 0 ? true : false;
+
+    let dueDate = new Date(due);
+    if (today > dueDate)
+        return true;
+    return false;
+
 
 }
+
+function onMarkDone() {
+    $('#status').val("COMPLETED");
+
+    let hidden = true;
+
+    hidden = !hidden;
+    if (hidden) {
+        $('#complete').style.display = 'inline';
+        // $('#status').style.display('inline');
+    } else {
+        $('#complete').style.display = 'none';
+    }
+
+    //send to database ??
+
+
+}
+
