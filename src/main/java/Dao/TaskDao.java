@@ -4,11 +4,6 @@ import Config.Mysql;
 import Model.Task;
 
 import java.sql.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.sql.Date;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +24,7 @@ public class TaskDao {
             ps.setString(6, task.getStatus());
             ps.setString(7, task.getAssignedTo());
             ps.setString(8, task.getAssignedToTeam());
-           int res = ps.executeUpdate();
+            int res = ps.executeUpdate();
 
             ps.close();
         } catch (SQLException e) {
@@ -42,11 +37,11 @@ public class TaskDao {
 
     public List<Task> getTasks(String assignTo, String assignTeam) {
         String query = "";
-        if(!assignTo.equals("")){
+        if (!assignTo.equals("")) {
             query = "SELECT * from TASK where ASSIGNTO = '" + assignTo + "'";
-        }else if(!assignTeam.equals("")){
+        } else if (!assignTeam.equals("")) {
             query = "SELECT * from TASK where ASSIGNTEAM = '" + assignTeam + "'";
-        }else{
+        } else {
             query = "SELECT * from TASK";
         }
 
@@ -66,7 +61,7 @@ public class TaskDao {
                 String assignedTo = rs.getString("ASSIGNTO");
                 String assignToTeam = rs.getString("ASSIGNTEAM");
 
-                tasksList.add(new Task(taskId, name, category, priority, dueDate, status, assignedTo, assignToTeam)) ;
+                tasksList.add(new Task(taskId, name, category, priority, dueDate, status, assignedTo, assignToTeam));
             }
             stmt.close();
         } catch (SQLException s) {
@@ -77,15 +72,16 @@ public class TaskDao {
         }
         return tasksList;
     }
-    
+
+
     public void updateTask(Task task) throws ClassNotFoundException, SQLException {
         String query = "UPDATE TASK SET NAME=?"
-        		+ ",CATEGORY=?,PRIORITY=?,DUEDATE=?,ASSIGNTO=?,ASSIGNTEAM=? WHERE TASKID=?";
+                + ",CATEGORY=?,PRIORITY=?,DUEDATE=?,ASSIGNTO=?,ASSIGNTEAM=? WHERE TASKID=?";
 
 
         try (Connection connection = Mysql.getMysqlConnection()) {
             PreparedStatement ps = connection.prepareStatement(query);
-           
+
             ps.setString(1, task.getName());
             ps.setString(2, task.getCategory());
             ps.setString(3, task.getPriority());
@@ -93,7 +89,7 @@ public class TaskDao {
             ps.setString(5, task.getAssignedTo());
             ps.setString(6, task.getAssignedToTeam());
             ps.setInt(7, Integer.valueOf(task.getTaskID()));
-           int res = ps.executeUpdate();
+            int res = ps.executeUpdate();
 
             ps.close();
         } catch (SQLException e) {
@@ -104,11 +100,22 @@ public class TaskDao {
         }
 
 
-
-
     }
 
-
+    public void updateTaskStatus(String id) throws ClassNotFoundException, SQLException {
+        String query = "UPDATE TASK SET STATUS ='COMPLETED' WHERE TASKID=?";
+        try (Connection connection = Mysql.getMysqlConnection()) {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, Integer.valueOf(id));
+            int res = ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println("Exception thrown in updating task status ");
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
 
 
 

@@ -6,7 +6,6 @@ $(function () {
     $("#datatable-responsive2").on('click', '.edit', onUpdate);
     $("#datatable-responsive2").on('click', '#changestatus', onChangeStatus);
 
-    $("#datatable-responsive2").on('click', '.completed', onMarkDone);
     getTasks();
 });
 
@@ -65,6 +64,7 @@ function addTask() {
             $('#ajax-loader').hide();
         });
     }
+
 
 
 }
@@ -152,11 +152,6 @@ function onCancel() {
     $('#name').val("");
 }
 
-function onChangeStatus() {
-    let id = $(this).attr("data-id");
-    // alert("onChangeStatus Called " + id);
-
-}
 
 function onOverDue(due) {
 
@@ -176,21 +171,30 @@ function onOverDue(due) {
 
 }
 
-function onMarkDone() {
-    $('#status').val("COMPLETED");
 
-    let hidden = true;
+function onChangeStatus() {
+    let id = $(this).attr("data-id");
 
-    hidden = !hidden;
-    if (hidden) {
-        $('#complete').style.display = 'inline';
-        // $('#status').style.display('inline');
-    } else {
-        $('#complete').style.display = 'none';
-    }
+    $('#id').val(id);
 
-    //send to database ??
+
+    $.ajax("updatetaskstatus", {
+        "type": "post",
+        "data": {
+            "Id": id,
+
+        }
+    }).done(function (response) {
+        getTasks();
+        alert("Updated");
+    }).always(function () {
+        $('#ajax-loader').hide();
+    });
 
 
 }
+
+
+
+
 
