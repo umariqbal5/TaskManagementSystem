@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = { "/tasks", "/home.jsp"})
+@WebFilter(urlPatterns = { "/tasks", "/home.jsp","/users.jsp"})
 public class SecurityFilter implements Filter {
 
     public SecurityFilter() {
