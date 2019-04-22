@@ -23,7 +23,8 @@
         <h3>General</h3>
         <ul class="nav side-menu">
             <li><a><i class="fa fa-home"></i> Tasks</a>
-            <li><a><i class="fa fa-user"></i> Users</a>
+            <li><a href="<%= request.getContextPath() %>/users.jsp"><i class="fa fa-user"></i> Users</a></li>
+            <li><a href="<%= request.getContextPath() %>/teams.jsp"><i class="fa fa-user"></i> Teams</a></li>
             </li>
 
         </ul>

@@ -5,6 +5,7 @@ import Model.Role;
 import Model.User;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class UserDao {
     public void saveUser(User user) throws ClassNotFoundException, SQLException {
@@ -35,6 +36,69 @@ public class UserDao {
         }
     }
 
+    public void updateUser(User user) throws ClassNotFoundException, SQLException {
+        String query = "UPDATE USER SET "
+                + "USERNAME=?, PASSWORD=?, FULLNAME=?, STATE=?, CITY=?, STREET=?, ZIPCODE=?, EMAIL=?, ROLE=? where USERNAME=? ";
+
+        try (Connection connection = Mysql.getMysqlConnection()) {
+            PreparedStatement ps = connection.prepareStatement(query);
+
+            ps.setString(1, user.getUserName());
+            ps.setString(2, user.getPassWord());
+            ps.setString(3, user.getFullName());
+            ps.setString(4, user.getState());
+            ps.setString(5, user.getCity());
+            ps.setString(6, user.getStreet());
+            ps.setInt(7, user.getZipCode() == null ? 0 : user.getZipCode());
+            ps.setString(8, user.getEmail());
+            ps.setString(9, user.getRole());
+
+            ps.setString(10, user.getUserName());
+            ps.executeUpdate();
+
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println("Exception thrown in save User " + user.getUserName());
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    public  ArrayList<User> getUsers() {
+        String query = "SELECT * from USER ;";
+            ArrayList<User> AllUsers=new ArrayList<>();
+        User user = null;
+        try (Connection con = Mysql.getMysqlConnection(); Statement stmt = con.createStatement()) {
+            System.out.println("the query: " + query);
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                int userid=Integer.parseInt(rs.getString("USERID"));
+                String userName = rs.getString("USERNAME");
+                String password = rs.getString("PASSWORD");
+                String fullName = rs.getString("FULLNAME");
+                String gender = rs.getString("GENDER");
+                String state = rs.getString("STATE");
+                String city = rs.getString("CITY");
+                String street = rs.getString("STREET");
+                Integer zipcode = rs.getInt("ZIPCODE");
+                Date birthDate = rs.getDate("BIRTHDATE");
+                String email = rs.getString("EMAIL");
+                String role = rs.getString("ROLE");
+     //           System.out.println("the query: " + userid);
+                user = new User(userid,userName, password, email, fullName, state, city, street, zipcode,birthDate,role,gender);
+          //     user.setUserId(rs.getInt("USERID"));
+                AllUsers.add(user);
+            }
+            stmt.close();
+        } catch (SQLException s) {
+            System.out.println("Exception thrown in retrieveUser ....");
+            s.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        return AllUsers;
+    }
     public User getUser(String userName) {
         String query = "SELECT * from USER where username = '" + userName + "';";
         User user = null;

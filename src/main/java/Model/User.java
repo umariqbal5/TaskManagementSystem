@@ -14,6 +14,7 @@ public class User {
     private Integer zipCode;
     private Date birthDate;
     private String role;
+    private String gender;
 
     public User() {
     }
@@ -32,7 +33,7 @@ public class User {
     }
 
     public User(Integer userId, String userName, String passWord, String email, String fullName, String state, String city,
-                String street, Integer zipCode, Date birthDate, String role) {
+                String street, Integer zipCode, Date birthDate, String role, String gender) {
         this.userId = userId;
         this.userName = userName;
         this.passWord = passWord;
@@ -44,8 +45,16 @@ public class User {
         this.zipCode = zipCode;
         this.birthDate = birthDate;
         this.role = role;
+        this.gender = gender;
     }
 
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
     public Integer getUserId() {
         return userId;
     }
