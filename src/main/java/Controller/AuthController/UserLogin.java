@@ -12,6 +12,7 @@ import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @WebServlet("/login")
@@ -24,6 +25,7 @@ public class UserLogin extends HttpServlet {
         String password = request.getParameter("password");
         String rememberMe = request.getParameter("rememberMe");
         User user = userDao.getUser(userName);
+        String Teams = userDao.getUserTeams(user.getUserId().toString());
         if (user == null) {
             System.out.println("User not existed");
             request.setAttribute("errors", "Username is not existed");
@@ -45,6 +47,7 @@ public class UserLogin extends HttpServlet {
             newSession.setAttribute("userName", user.getUserName());
             newSession.setAttribute("userId", user.getUserId());
             newSession.setAttribute("userRole", user.getRole());
+            newSession.setAttribute("userTeams", Teams);
 
             if (!StringUtils.isNullOrEmpty(rememberMe)) {
                 Cookie cookieRememberMe = new Cookie("rememberMe", "true");

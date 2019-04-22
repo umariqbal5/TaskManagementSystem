@@ -6,6 +6,7 @@ import Model.User;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class UserDao {
     public void saveUser(User user) throws ClassNotFoundException, SQLException {
@@ -154,5 +155,24 @@ public class UserDao {
             throw new RuntimeException(e.getMessage());
         }
         return AllUsers;
+    }
+    
+    public  String getUserTeams(String userId) {
+        String query = "SELECT TEAMS.TEAMNAME FROM TEAMUSER  JOIN TEAMS ON TEAMS.TEAMID= TEAMUSER.TEAMID WHERE USERID='"+userId+"'";
+        String AllTeams="";
+        try (Connection con = Mysql.getMysqlConnection(); Statement stmt = con.createStatement()) {
+            System.out.println("the query: " + query);
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+            	AllTeams += rs.getString("TEAMNAME")+",";
+            }
+            stmt.close();
+        } catch (SQLException s) {
+            System.out.println("Exception thrown in retrieve User List ....");
+            s.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        return AllTeams;
     }
 }
