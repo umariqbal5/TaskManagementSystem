@@ -49,7 +49,7 @@ public class SecurityFilter implements Filter {
             }
         }
         if ("developer".equals(userRole)) {
-            if ("/home.jsp".equals(servletPath) || "/".equals(servletPath)) {
+            if ("/home.jsp".equals(servletPath) || "/".equals(servletPath) || "/tasks".equals(servletPath)) {
                 filterChain.doFilter(request, response);
                 return;
             } else {
@@ -81,7 +81,7 @@ public class SecurityFilter implements Filter {
     }
 
     private void goToAccessDenied(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
-        request.getRequestDispatcher(request.getContextPath() + "denied.jsp").forward(request, response);
+        request.getRequestDispatcher("/denied.jsp").forward(request, response);
     }
 
 }

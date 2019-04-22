@@ -75,14 +75,18 @@ function addTask(){
 
 }
 
-function getTasks(){
+function getTasks(){	
+	var role = $("#role").val();
+	
 	$('#ajax-loader').show();
     $.get("tasks").done(function(response){
         var taskList = response;
 
 //        console.log(taskList);
         $("#datatable-responsive2").find('tbody').find("tr").remove();
+        	let show = $('#role').val()=="developer"?"hidden":"";
         $.each(taskList, function(index, task){
+        	let sameUser = checkUser(task.AssignedTo, task.AssignedToTeam);
         	
         	let prior = task.Priority==1?"LOW":task.Priority==2?"MEDIUM":"HIGH";
         	$("#datatable-responsive2").find('tbody').append(
@@ -104,9 +108,9 @@ function getTasks(){
                 +'" data-duedate="'+task.DueDate 
                 +'" data-assignto="'+task.AssignedTo 
                 +'" data-assigntoteam="'+task.AssignedToTeam 
-                +'" class="edit btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </button>\n' +
-                '                        <button type="button" data-id="'+task.TaskID+'" id="btnDelete" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </button>\n' +
-                '                        <button type="button" data-id="'+task.TaskID+'" id="changestatus" class="btn btn-warning btn-xs"><i class="fa fa-trash-o"></i> Mark as Done </button>\n' +
+                +'" class=" '+show+' edit btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </button>\n' +
+                '                        <button type="button" data-id="'+task.TaskID+'" id="btnDelete" class="'+show+' btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </button>\n' +
+                '                        <button type="button" data-id="'+task.TaskID+'" id="changestatus" class=" '+sameUser+' btn btn-warning btn-xs"><i class="fa fa-trash-o"></i> Mark as Done </button>\n' +
                 '                      </td>\n' +
                 '                    </tr>'
             )
@@ -189,4 +193,20 @@ function deleteTask(){
 	    }
 	    return false;		
 	}
+}
+
+function checkUser(AssignedTo, AssignedToTeam){
+	let role = $('#role').val();
+	let loggedUserId = $('#loggedUserId').val();
+	
+	if(role!="developer") return "hidden";
+	
+	if(loggedUserId == AssignedTo){
+		return "";
+	}else{
+		return "hidden";
+	}
+	
+		
+		
 }
