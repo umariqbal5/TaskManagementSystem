@@ -24,8 +24,7 @@
         <% if(session.getAttribute("userRole").equals("admin")){ %>
         <ul class="nav side-menu">
             <li><a href="<%= request.getContextPath() %>/home.jsp"><i class="fa fa-home"></i> Tasks</a></li>
-         	<li><a href="<%= request.getContextPath() %>/users.jsp"><i class="fa fa-user"></i> Users</a></li>
-            <li><a href="<%= request.getContextPath() %>/teams.jsp"><i class="fa fa-user"></i> Teams</a></li>
+         	<li><a href="<%= request.getContextPath() %>/users.jsp"><i class="fa fa-user"></i> Users</a></li>\
         </ul>
         <%} %>
         <% if(session.getAttribute("userRole").equals("manager")){ %>

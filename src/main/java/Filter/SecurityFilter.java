@@ -41,7 +41,7 @@ public class SecurityFilter implements Filter {
 
         if ("manager".equals(userRole)) {
             if ("/home.jsp".equals(servletPath) || "/".equals(servletPath)
-                    | "/team.jsp".equals(servletPath)) {
+                    | "/team.jsp".equals(servletPath) || "/tasks".equals(servletPath)) {
                 filterChain.doFilter(request, response);
                 return;
             } else {
