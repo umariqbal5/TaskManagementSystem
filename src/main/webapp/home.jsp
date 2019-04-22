@@ -74,7 +74,7 @@
           </div>
           <div class="clearfix"></div>
           <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12 ${ (userRole.equals('developer') || userRole.equals('admin'))?'hidden':''}">
+            <div class="col-md-12 col-sm-12 col-xs-12 ${ userRole.equals('developer')?'hidden':''} ${ userRole.equals('admin')?'hidden':''}">
               <div class="x_panel">
                 <div class="x_title">
                   <h2>Task</h2>
