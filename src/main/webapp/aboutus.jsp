@@ -40,25 +40,25 @@
             '<p>Name: Viet Anh Phan</p>' +
             '<p>Country: Vietnam</p>' +
             '<p>Email: phanvietanh90@gmail.com</p>'+
-            '<img width="100" height="100" src="/images/phanvietanh.jpg">';
+            '<img width="100" height="100" src="images/phanvietanh.jpg">';
 
         var contentString2 = '' +
             '<p>Name: Muhammad Omer</p>' +
             '<p>Country: Pakistan</p>' +
             '<p>Email: mu.iqbal@mum.edu</p>' +
-            '<img width="100" height="100" src="/images/omar.jpg">';
+            '<img width="100" height="100" src="images/omar.jpg">';
 
         var contentString3 = '' +
             '<p>Name: Abdu Endris</p>' +
             '<p>Country:Ethiopioa </p>' +
             '<p>Email: ab.mohammed@mum.edu</p>' +
-            '<img width="100" height="100" src="/images/abdu.jpg">';
+            '<img width="100" height="100" src="images/abdu.jpg">';
 
         var contentString4 = '' +
             '<p>Name: Hisham Quandil</p>' +
             '<p>Country: Palestine</p>' +
             '<p>Email:hishma.qandil@mum.edu </p>'+
-            '<img width="100" height="100" src="/images/user.png">';
+            '<img width="100" height="100" src="images/user.png">';
 
         var infowindow1 = new google.maps.InfoWindow({
             content: contentString1
