@@ -1,6 +1,7 @@
 package Controller.UserController;
 
 import Dao.UserDao;
+import Model.Task;
 import Model.User;
 import com.google.gson.Gson;
 
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet("/getdevelopers")
 public class UserListServlet extends HttpServlet {
@@ -21,13 +23,14 @@ public class UserListServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Gson gson = new Gson();
+        
+        PrintWriter out = response.getWriter();
         ArrayList<User> allusers = new ArrayList<User>();
         allusers=userDao.getUsersList();
-        PrintWriter out = response.getWriter();
-        out.print(gson.toJson(allusers));
-
-        out.flush();
-        out.close();
+        String JSONdata;
+        JSONdata = new Gson().toJson(allusers);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        out.write(JSONdata);
     }
 }

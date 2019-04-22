@@ -132,7 +132,7 @@ public class UserDao {
     }
 
     public  ArrayList<User> getUsersList() {
-        String query = "SELECT USERID,USERNAME,ROLE from USER WHERE ROLE='developer'";
+        String query = "SELECT USERID,USERNAME,FULLNAME,ROLE from USER WHERE ROLE='developer'";
         ArrayList<User> AllUsers=new ArrayList<>();
         User user = null;
         try (Connection con = Mysql.getMysqlConnection(); Statement stmt = con.createStatement()) {
@@ -141,8 +141,9 @@ public class UserDao {
             while (rs.next()) {
                 int userid=Integer.parseInt(rs.getString("USERID"));
                 String userName = rs.getString("USERNAME");
+                String fullName = rs.getString("FULLNAME");
                 String role = rs.getString("ROLE");
-                user = new User(userid,userName, "", "", "", "", "", "", 00000,null,role,"");
+                user = new User(userid,userName, "", "", fullName, "", "", "", 00000,null,role,"");
                 AllUsers.add(user);
             }
             stmt.close();

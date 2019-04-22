@@ -44,6 +44,7 @@ function addTask(){
                 type: 'success',
                 styling: 'bootstrap3'
             });
+            onCancel();
             
         }).always(function() {
         	$('#ajax-loader').hide();
@@ -68,6 +69,7 @@ function addTask(){
                 type: 'success',
                 styling: 'bootstrap3'
             });
+            onCancel();
         }).always(function() {
         	$('#ajax-loader').hide();
         });
@@ -137,11 +139,10 @@ function getAllDevelopers() {
             $('#user').children('option').remove();
 
             $.each(userList, function (i, item) {
-                // $('#user').append($('<option>', {
-                //     value: i.userId,
-                //     text: i.userName
-                // }))
-                console.log(i)
+                 $('#user').append($('<option>', {
+                     value: item.userId,
+                     text: item.fullName
+                 }))
             });
         }
 
@@ -171,7 +172,6 @@ function onUpdate(){
 	$('#duedate').val(duedate);
 	$('#name').val(name).focus();
 	
-	
 }
 
 function onCancel(){
@@ -183,6 +183,7 @@ function onCancel(){
 	$('#duedate').val("");
 	$('#name').val("");
 }
+
 function onChangeStatus(){
 	let id = $(this).attr("data-id");
 	alert("onChangeStatus Called "+id);
@@ -238,11 +239,10 @@ function checkUser(AssignedTo, AssignedToTeam, status){
 function onOverDue(due,status) {
 
     if(status=="COMPLETED" || status=="completed" ) return false;
-    let q = new Date();
-    let m = q.getMonth() + 1;
-    let d = q.getDay();
-    let y = q.getFullYear();
-    let today = new Date(y, m, d);
+    
+    var dNow = new Date();
+    var s = dNow.getMonth()+1 + '/' + dNow.getDate() + '/' + dNow.getFullYear();
+    let today = new Date(s);
     let dueDate = new Date(due);
     if (today > dueDate)
         return true;
