@@ -86,7 +86,12 @@ function getTasks(){
         $("#datatable-responsive2").find('tbody').find("tr").remove();
         	let show = $('#role').val()=="developer"?"hidden":"";
         $.each(taskList, function(index, task){
-        	let sameUser = checkUser(task.AssignedTo, task.AssignedToTeam);
+            //OverDue Warning
+            let diff = onOverDue(task.DueDate,task.Status);
+            let status = diff == true ? "" : "hidden";
+
+            //Show hide Mark As Done Button
+        	let sameUser = checkUser(task.AssignedTo, task.AssignedToTeam, task.Status);
         	
         	let prior = task.Priority==1?"LOW":task.Priority==2?"MEDIUM":"HIGH";
         	$("#datatable-responsive2").find('tbody').append(
@@ -95,7 +100,8 @@ function getTasks(){
                 '                      <td>'+task.DueDate+'</td>\n' +
                 '                      <td>'+task.Category+'</td>\n' +
                 '                      <td>\n' +
-                '                        <button type="button" class="btn btn-success btn-xs">'+task.Status+'</button>\n' +
+                '                      <button type="button" data-id="status" id="status" class="btn btn-success btn-xs">' + task.Status + '</button>' +
+                '                      <span class="label label-danger '+status+'"><i class="fa fa-warning"></i> OVERDUE</span>' +
                 '                      </td>\n' +
                 '                      <td><button type="button" class="btn btn-warning btn-xs">'+prior+'</button></td>\n' +
                 '                      <td>'+task.AssignedTo+'</td>\n' +
@@ -195,7 +201,9 @@ function deleteTask(){
 	}
 }
 
-function checkUser(AssignedTo, AssignedToTeam){
+function checkUser(AssignedTo, AssignedToTeam, status){
+    if(status=="COMPLETED" || status=="completed" ) return "hidden";
+
 	let role = $('#role').val();
 	let loggedUserId = $('#loggedUserId').val();
 	
@@ -209,4 +217,20 @@ function checkUser(AssignedTo, AssignedToTeam){
 	
 		
 		
+}
+
+function onOverDue(due,status) {
+
+    if(status=="COMPLETED" || status=="completed" ) return false;
+    let q = new Date();
+    let m = q.getMonth() + 1;
+    let d = q.getDay();
+    let y = q.getFullYear();
+    let today = new Date(y, m, d);
+    let dueDate = new Date(due);
+    if (today > dueDate)
+        return true;
+    return false;
+
+
 }
