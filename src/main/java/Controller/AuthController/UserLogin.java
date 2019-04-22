@@ -41,7 +41,7 @@ public class UserLogin extends HttpServlet {
             HttpSession newSession = request.getSession(true);
 
             //setting session to expiry in 5 mins
-            newSession.setMaxInactiveInterval(5 * 60);
+            newSession.setMaxInactiveInterval(60 * 60);
             newSession.setAttribute("userName", user.getUserName());
             newSession.setAttribute("userId", user.getUserId());
             newSession.setAttribute("userRole", user.getRole());

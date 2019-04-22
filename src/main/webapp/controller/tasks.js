@@ -9,6 +9,7 @@ $(function() {
     
    
     getTasks();
+    getAllDevelopers();
 });
 
 function addTask(){
@@ -43,6 +44,7 @@ function addTask(){
                 type: 'success',
                 styling: 'bootstrap3'
             });
+            onCancel();
             
         }).always(function() {
         	$('#ajax-loader').hide();
@@ -67,6 +69,7 @@ function addTask(){
                 type: 'success',
                 styling: 'bootstrap3'
             });
+            onCancel();
         }).always(function() {
         	$('#ajax-loader').hide();
         });
@@ -75,14 +78,23 @@ function addTask(){
 
 }
 
-function getTasks(){
+function getTasks(){	
+	var role = $("#role").val();
+	
 	$('#ajax-loader').show();
     $.get("tasks").done(function(response){
         var taskList = response;
 
 //        console.log(taskList);
         $("#datatable-responsive2").find('tbody').find("tr").remove();
+        	let show = $('#role').val()=="developer"?"hidden":"";
         $.each(taskList, function(index, task){
+            //OverDue Warning
+            let diff = onOverDue(task.DueDate,task.Status);
+            let status = diff == true ? "" : "hidden";
+
+            //Show hide Mark As Done Button
+        	let sameUser = checkUser(task.AssignedTo, task.AssignedToTeam, task.Status);
         	
         	let prior = task.Priority==1?"LOW":task.Priority==2?"MEDIUM":"HIGH";
         	$("#datatable-responsive2").find('tbody').append(
@@ -91,7 +103,8 @@ function getTasks(){
                 '                      <td>'+task.DueDate+'</td>\n' +
                 '                      <td>'+task.Category+'</td>\n' +
                 '                      <td>\n' +
-                '                        <button type="button" class="btn btn-success btn-xs">'+task.Status+'</button>\n' +
+                '                      <button type="button" data-id="status" id="status" class="btn btn-success btn-xs">' + task.Status + '</button>' +
+                '                      <span class="label label-danger '+status+'"><i class="fa fa-warning"></i> OVERDUE</span>' +
                 '                      </td>\n' +
                 '                      <td><button type="button" class="btn btn-warning btn-xs">'+prior+'</button></td>\n' +
                 '                      <td>'+task.AssignedTo+'</td>\n' +
@@ -104,9 +117,9 @@ function getTasks(){
                 +'" data-duedate="'+task.DueDate 
                 +'" data-assignto="'+task.AssignedTo 
                 +'" data-assigntoteam="'+task.AssignedToTeam 
-                +'" class="edit btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </button>\n' +
-                '                        <button type="button" data-id="'+task.TaskID+'" id="btnDelete" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </button>\n' +
-                '                        <button type="button" data-id="'+task.TaskID+'" id="changestatus" class="btn btn-warning btn-xs"><i class="fa fa-trash-o"></i> Mark as Done </button>\n' +
+                +'" class=" '+show+' edit btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </button>\n' +
+                '                        <button type="button" data-id="'+task.TaskID+'" id="btnDelete" class="'+show+' btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </button>\n' +
+                '                        <button type="button" data-id="'+task.TaskID+'" id="changestatus" class=" '+sameUser+' btn btn-warning btn-xs"><i class="fa fa-trash-o"></i> Mark as Done </button>\n' +
                 '                      </td>\n' +
                 '                    </tr>'
             )
@@ -118,8 +131,22 @@ function getTasks(){
     });
 }
 
-function getAllUsers() {
-    $.get("users").done();
+function getAllDevelopers() {
+    $.get("getdevelopers").done(function(response){
+        var userList = response;
+
+        if(userList && userList.length){
+            $('#user').children('option').remove();
+
+            $.each(userList, function (i, item) {
+                 $('#user').append($('<option>', {
+                     value: item.userId,
+                     text: item.fullName
+                 }))
+            });
+        }
+
+    });
 
 }
 
@@ -145,7 +172,6 @@ function onUpdate(){
 	$('#duedate').val(duedate);
 	$('#name').val(name).focus();
 	
-	
 }
 
 function onCancel(){
@@ -157,6 +183,7 @@ function onCancel(){
 	$('#duedate').val("");
 	$('#name').val("");
 }
+
 function onChangeStatus(){
 	let id = $(this).attr("data-id");
 	alert("onChangeStatus Called "+id);
@@ -189,4 +216,37 @@ function deleteTask(){
 	    }
 	    return false;		
 	}
+}
+
+function checkUser(AssignedTo, AssignedToTeam, status){
+    if(status=="COMPLETED" || status=="completed" ) return "hidden";
+
+	let role = $('#role').val();
+	let loggedUserId = $('#loggedUserId').val();
+	
+	if(role!="developer") return "hidden";
+	
+	if(loggedUserId == AssignedTo){
+		return "";
+	}else{
+		return "hidden";
+	}
+	
+		
+		
+}
+
+function onOverDue(due,status) {
+
+    if(status=="COMPLETED" || status=="completed" ) return false;
+    
+    var dNow = new Date();
+    var s = dNow.getMonth()+1 + '/' + dNow.getDate() + '/' + dNow.getFullYear();
+    let today = new Date(s);
+    let dueDate = new Date(due);
+    if (today > dueDate)
+        return true;
+    return false;
+
+
 }

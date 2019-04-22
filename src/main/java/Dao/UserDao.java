@@ -130,4 +130,29 @@ public class UserDao {
         }
         return user;
     }
+
+    public  ArrayList<User> getUsersList() {
+        String query = "SELECT USERID,USERNAME,FULLNAME,ROLE from USER WHERE ROLE='developer'";
+        ArrayList<User> AllUsers=new ArrayList<>();
+        User user = null;
+        try (Connection con = Mysql.getMysqlConnection(); Statement stmt = con.createStatement()) {
+            System.out.println("the query: " + query);
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                int userid=Integer.parseInt(rs.getString("USERID"));
+                String userName = rs.getString("USERNAME");
+                String fullName = rs.getString("FULLNAME");
+                String role = rs.getString("ROLE");
+                user = new User(userid,userName, "", "", fullName, "", "", "", 00000,null,role,"");
+                AllUsers.add(user);
+            }
+            stmt.close();
+        } catch (SQLException s) {
+            System.out.println("Exception thrown in retrieve User List ....");
+            s.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        return AllUsers;
+    }
 }

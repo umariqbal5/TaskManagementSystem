@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,9 +73,8 @@
           <div class="title_left">
           </div>
           <div class="clearfix"></div>
-
           <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-12 col-sm-12 col-xs-12 ${ (userRole.equals('developer') || userRole.equals('admin'))?'hidden':''}">
               <div class="x_panel">
                 <div class="x_title">
                   <h2>Task</h2>
@@ -87,7 +87,9 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="hidden" id="id"/>
+                      	<input type="hidden" id="id"/>
+                      	<input type="hidden" id="role" value="${userRole}"/>
+                      	<input type="hidden" id="loggedUserId" value="${userId}"/>
                         <input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="Task Name" required="required" type="text">
                       </div>
                     </div>
@@ -157,6 +159,7 @@
                 </div>
               </div>
             </div>
+            
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
