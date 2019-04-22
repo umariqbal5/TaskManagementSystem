@@ -1,5 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,7 +30,10 @@
   <link href="vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 
   <!-- PNotify -->
-  <link href="vendors/pnotify/pnotify.custom.min.css" media="all" rel="stylesheet" type="text/css" />
+  <link href="vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+  <link href="vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+  <link href="vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+
 
   <!-- Custom Theme Style -->
   <link href="build/css/custom.min.css" rel="stylesheet">
@@ -73,8 +75,9 @@
           <div class="title_left">
           </div>
           <div class="clearfix"></div>
+
           <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12 ${userRole.equals('developer')?'hidden':''}">
+            <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
                   <h2>Task</h2>
@@ -87,9 +90,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                      	<input type="hidden" id="id"/>
-                      	<input type="hidden" id="role" value="${userRole}"/>
-                      	<input type="hidden" id="loggedUserId" value="${userId}"/>
+                      <input type="hidden" id="id"/>
                         <input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="Task Name" required="required" type="text">
                       </div>
                     </div>
@@ -119,7 +120,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Assign to</label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <select class="form-control" id="user">
-                          <option value="" sel>Select User</option>
+                          <option>Select User</option>
                           <option value="user1">User1</option>
                           <option value="user2">User2</option>
                         </select>
@@ -130,7 +131,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Assign to Team</label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <select class="form-control" id="team">
-                          <option value="">Select Team</option>
+                          <option>Select Team</option>
                           <option value="team2">Team 2</option>
                           <option value="team3">Team 3</option>
                         </select>
@@ -159,7 +160,6 @@
                 </div>
               </div>
             </div>
-            
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
@@ -227,8 +227,9 @@
   <script src="vendors/pdfmake/build/pdfmake.min.js"></script>
   <script src="vendors/pdfmake/build/vfs_fonts.js"></script>
   <!-- PNotify -->
-  <script type="text/javascript" src="vendors/pnotify/pnotify.custom.min.js"></script>
-  
+  <script src="vendors/pnotify/dist/pnotify.js" type="5c2ea6151e4c131cbc033947-text/javascript"></script>
+  <script src="vendors/pnotify/dist/pnotify.buttons.js" type="5c2ea6151e4c131cbc033947-text/javascript"></script>
+  <script src="vendors/pnotify/dist/pnotify.nonblock.js" type="5c2ea6151e4c131cbc033947-text/javascript"></script>
   <!-- bootstrap-daterangepicker -->
   <script src="vendors/moment/min/moment.min.js"></script>
   <!-- bootstrap-datetimepicker -->
