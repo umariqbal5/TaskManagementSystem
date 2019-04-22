@@ -9,6 +9,7 @@ $(function() {
     
    
     getTasks();
+    getAllDevelopers();
 });
 
 function addTask(){
@@ -128,8 +129,23 @@ function getTasks(){
     });
 }
 
-function getAllUsers() {
-    $.get("users").done();
+function getAllDevelopers() {
+    $.get("getdevelopers").done(function(response){
+        var userList = response;
+
+        if(userList && userList.length){
+            $('#user').children('option').remove();
+
+            $.each(userList, function (i, item) {
+                // $('#user').append($('<option>', {
+                //     value: i.userId,
+                //     text: i.userName
+                // }))
+                console.log(i)
+            });
+        }
+
+    });
 
 }
 
