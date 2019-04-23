@@ -178,8 +178,8 @@ function getAllTeams() {
 
             $.each(teamList, function (i, item) {
                  $('#team').append($('<option>', {
-                     value: item.teamName,
-                     text: item.teamName
+                     value: item.teamname,
+                     text: item.teamname
                  }))
             });
         }

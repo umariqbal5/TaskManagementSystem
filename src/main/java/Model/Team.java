@@ -14,7 +14,7 @@ public class Team {
     {
 
     }
-    public Team(String teamId, String teamName)
+    public Team(int teamId, String teamName)
     {
 
         this.teamid=teamId;
