@@ -10,8 +10,8 @@ import java.util.ArrayList;
 public class UserDao {
     public void saveUser(User user) throws ClassNotFoundException, SQLException {
         String query = "INSERT INTO USER"
-                + "(USERID, USERNAME, PASSWORD, FULLNAME, STATE, CITY, STREET, ZIPCODE, EMAIL, ROLE) VALUES"
-                + "(?,?,?,?,?,?,?,?,?,?)";
+                + "(USERID, USERNAME, PASSWORD, FULLNAME, STATE, CITY, STREET, ZIPCODE, EMAIL, ROLE,GENDER) VALUES"
+                + "(?,?,?,?,?,?,?,?,?,?,?)";
 
         try (Connection connection = Mysql.getMysqlConnection()) {
             PreparedStatement ps = connection.prepareStatement(query);
@@ -25,6 +25,7 @@ public class UserDao {
             ps.setInt(8, user.getZipCode() == null ? 0 : user.getZipCode());
             ps.setString(9, user.getEmail());
             ps.setString(10, user.getRole());
+            ps.setString(11, user.getGender());
             ps.executeUpdate();
 
             ps.close();
@@ -39,7 +40,7 @@ public class UserDao {
     public void updateUser(User user) throws ClassNotFoundException, SQLException {
         String query = "UPDATE USER SET "
                 + "USERNAME=?, PASSWORD=?, FULLNAME=?, STATE=?, CITY=?, STREET=?, ZIPCODE=?, EMAIL=?, ROLE=? where USERNAME=? ";
-
+        System.out.println(query);
         try (Connection connection = Mysql.getMysqlConnection()) {
             PreparedStatement ps = connection.prepareStatement(query);
 
@@ -99,6 +100,11 @@ public class UserDao {
         }
         return AllUsers;
     }
+
+
+
+
+
     public User getUser(String userName) {
         String query = "SELECT * from USER where username = '" + userName + "';";
         User user = null;
@@ -118,7 +124,7 @@ public class UserDao {
                 String email = rs.getString("EMAIL");
                 String role = rs.getString("ROLE");
 
-                user = new User(userName, password, email, fullName, role, state, city, street, zipcode);
+                user = new User(userName, password, email, fullName, role, state, city, street, zipcode,gender);
                 user.setUserId(rs.getInt("USERID"));
             }
             stmt.close();
@@ -130,4 +136,27 @@ public class UserDao {
         }
         return user;
     }
+
+
+    public static void deleteUser(int UserId) throws ClassNotFoundException, SQLException {
+        String query = "DELETE FROM USER WHERE USERID=?";
+System.out.println("test"+UserId);
+
+        try (Connection connection = Mysql.getMysqlConnection()) {
+            PreparedStatement ps = connection.prepareStatement(query);
+
+            ps.setInt(1, UserId);
+
+            ps.execute();
+
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println("Exception thrown in delete Task " + UserId);
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+
 }

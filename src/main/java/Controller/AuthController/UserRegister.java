@@ -26,7 +26,7 @@ public class UserRegister extends HttpServlet {
             request.setAttribute("errors", "Username is already existed");
             return;
         }
-        User user  = new User(userName, password, email, fullName, role, null, null, null, null);
+        User user  = new User(userName, password, email, fullName, role, null, null, null, null,null);
         try {
         userDao.saveUser(user);
         } catch (SQLException | ClassNotFoundException e) {

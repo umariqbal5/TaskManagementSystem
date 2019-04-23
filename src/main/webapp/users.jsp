@@ -9,6 +9,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Users </title>
+
+
     <link href="build/css/custom.min.css" rel="stylesheet">
     <link href="css/custom.css" rel="stylesheet">
     <!-- Bootstrap -->
@@ -65,9 +67,7 @@
         <!-- top navigation -->
         <jsp:include page="WEB-INF/header.jsp"></jsp:include>
         <!-- /top navigation -->
-        <div class="ajax-loader" id="ajax-loader">
-            <img src="images/ajax-loader.gif" class="img-responsive" />
-        </div>
+
         <!-- page content -->
         <div class="right_col" role="main">
             <div class="ajax-loader" id="ajax-loader">
@@ -95,6 +95,8 @@
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                 <input id="userName" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="userName" placeholder="User Name" required="required" type="text">
+                                                <input type="hidden" id="userId" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" >
+
                                             </div>
                                         </div>
 
@@ -273,6 +275,7 @@
 </script>
 
 <script type="text/javascript" src="controller/users.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </body>
 </html>

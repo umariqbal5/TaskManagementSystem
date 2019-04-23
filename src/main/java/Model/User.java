@@ -20,7 +20,7 @@ public class User {
     }
 
     public User(String userName, String passWord, String email, String fullName, String role, String state, String city,
-                String street, Integer zipCode) {
+                String street, Integer zipCode,String gender) {
         this.userName = userName;
         this.passWord = passWord;
         this.email = email;
@@ -30,6 +30,7 @@ public class User {
         this.city = city;
         this.street = street;
         this.zipCode = zipCode;
+        this.gender = gender;
     }
 
     public User(Integer userId, String userName, String passWord, String email, String fullName, String state, String city,

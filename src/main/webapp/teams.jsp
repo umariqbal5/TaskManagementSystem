@@ -9,6 +9,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Teams </title>
+
+
+
+
     <link href="build/css/custom.min.css" rel="stylesheet">
     <link href="css/custom.css" rel="stylesheet">
     <!-- Bootstrap -->
@@ -31,9 +35,9 @@
     <link href="vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 
     <!-- PNotify -->
-    <link href="vendors/pnotify/dist/pnotify.css" rel="stylesheet">
-    <link href="vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
-    <link href="vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+<%--    <link href="vendors/pnotify/dist/pnotify.css" rel="stylesheet">--%>
+<%--    <link href="vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">--%>
+<%--    <link href="vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">--%>
 
 
     <!-- Custom Theme Style -->
@@ -65,9 +69,7 @@
         <!-- top navigation -->
         <jsp:include page="WEB-INF/header.jsp"></jsp:include>
         <!-- /top navigation -->
-        <div class="ajax-loader" id="ajax-loader">
-            <img src="images/ajax-loader.gif" class="img-responsive" />
-        </div>
+
         <!-- page content -->
         <div class="right_col" role="main">
             <div class="ajax-loader" id="ajax-loader">
@@ -91,43 +93,42 @@ f
 
                                     <form class="form-horizontal form-label-left" novalidate>
                                         <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Team id">Team id <span class="required">*</span>
-                                            </label>
+
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input id="Team id" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="Team id" placeholder="Team id" required="required" type="text">
+                                                <input id="Teamid" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="Team id" placeholder="Team id" required="required"  type="hidden">
                                             </div>
                                         </div>
 
                                         <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Password <span class="required">*</span></label>
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Team Name <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input id="name"  type="text" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="Password" required="required" >
+                                                <input id="teamname"  type="text" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="TeamName" placeholder="Team Name" required="required" >
 
-                                                <%--                                                <select class="form-control">--%>
-                                                <%--                                                    <option>Choose option</option>--%>
-                                                <%--                                                    <option value="personal">Personal</option>--%>
-                                                <%--                                                    <option value="work">Work</option>--%>
-                                                <%--                                                </select>--%>
                                             </div>
                                         </div>
-
-
                                         <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="birthdate">Birth Date <span class="required"> *</span>
-                                            </label>
-                                            <div class='col-md-6 col-sm-6 col-xs-12 input-group date' id='birthdate'>
-                                                <input type='text' class="form-control" data-inputmask="'mask': '99/99/9999'"/>
-                                                <span class="input-group-addon">
-								   <span class="glyphicon glyphicon-calendar"></span>
-								</span>
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Team Description <span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <textarea id="teamdesc"  class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="teamdesc" placeholder="Team Description" required="required" >
+                                                </textarea>
                                             </div>
                                         </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Select Users</label>
+                                            <div class="col-md-9 col-sm-9 col-xs-12">
+                                                <select rows =8 class="select2_multiple form-control" id="selectusers" multiple="multiple">
+                                                    <option>Choose option</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+
 
                                         <div class="ln_solid"></div>
                                         <div class="form-group">
                                             <div class="col-md-6 col-md-offset-3">
-                                                <button type="submit" class="btn btn-primary">Clear</button>
-                                                <button id="send" type="submit" class="btn btn-success">Save</button>
+                                                <button type="button" id="clear" class="btn btn-primary">Clear</button>
+                                                <button id="save" type="button" class="btn btn-success">Save</button>
                                             </div>
                                         </div>
                                     </form>
@@ -147,15 +148,8 @@ f
                                         <tr>
                                             <th>Team ID</th>
                                             <th>Team Name</th>
-                                            <th>Full Name</th>
-                                            <th>Gender</th>
-                                            <th>State</th>
-                                            <th>City</th>
-                                            <th>Street</th>
-                                            <th>Zip Code</th>
-                                            <th>Birth Date</th>
-                                            <th>Email</th>
-                                            <th>Action</th>
+                                            <th>Description</th>
+
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -222,7 +216,21 @@ f
     $('#myDatepicker').datetimepicker({format: 'MM/DD/YYYY'});
 </script>
 
-<script type="text/javascript" src="controller/teams.js"></script>
+
+
+<script type="text/javascript" src="controller/team.js"></script>
+
+
+<%--<script src="./build/js/sweetalert.min.js"></script>--%>
+<%--<script src="./build/js/sweetalert.js"></script>--%>
+<%--<script src="./build/js/custom.js"></script>--%>
+<%--<script src="./build/js/custom.min.js"></script>--%>
+<%--<!-- Include a polyfill for ES6 Promises (optional) for IE11 -->--%>
+<%--<link rel="stylesheet" href="./build/css/sweetalert.min.css">--%>
+<%--<link rel="stylesheet" href="./build/css/sweetalert.css">--%>
+<%--<link rel="stylesheet" href="./build/css/custom.css">--%>
+<%--<link rel="stylesheet" href="./build/css/custom.min.css">--%>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </body>
 </html>

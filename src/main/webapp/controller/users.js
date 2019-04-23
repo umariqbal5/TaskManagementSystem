@@ -1,8 +1,78 @@
 $(function() {
 
+    $("#datatable-responsive2").on('click','.edit',onUpdate);
+    $("#datatable-responsive2").on('click','#btnDelete',deleteUser);
     $("#save").click(addUser);
     getUsers();
 });
+
+
+function onUpdate(){
+    let userid = $(this).attr("data-id");
+    let username = $(this).attr("data-name");
+    let fullname = $(this).attr("data-fullName");
+    let gender = $(this).attr("data-gender");
+    let state = $(this).attr("data-states");
+    let city = $(this).attr("data-city");
+    let street = $(this).attr("data-street");
+    let zipcode = $(this).attr("data-zipcode");
+    let birthdate = $(this).attr("data-birthdate");
+    let email = $(this).attr("data-email");
+
+    $('#userId').val(userid);
+    $('#userName').val(username);
+    $('#fullName').val(fullname);
+    $('#gender').val(gender);
+    $('#state').val(state);
+    $('#city').val(city);
+    $('#birthdate').val(birthdate);
+console.log("onscreen"+ $('#userName').val());
+    console.log("notonscreen"+username);
+}
+
+
+
+
+function deleteUser(){
+
+    let userid = $(this).attr("data-id");
+
+    swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this imaginary file!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+        .then((willDelete) => {
+        if (willDelete) {
+
+            $('#ajax-loader').show();
+            $.ajax("deleteuser", {
+                "type": "post",
+                "data": {
+                    "userId": userid
+                }
+            }).done(function (response) {
+                getUsers();
+                swal("Poof! Your User Account has been deleted!", {
+                        icon: "success",
+                    }
+                );
+            }).fail(function () {
+                swal("Your imaginary file is safe!");
+            }).always(function () {
+                $('#ajax-loader').hide();
+            });
+}
+});}
+    //     .then(willDelete) => {
+    //     if(willDelete) {
+    //
+    //     }
+    // };
+    // }
+
 
 function getUsers(){
     $('#ajax-loader').show();
@@ -21,13 +91,15 @@ function displayGuests(data) {
     $("#datatable-responsive2").find('tbody').find("tr").remove();
     $.each(object, function (index, value) {
 
-        $("#datatable-responsive2").find('tbody').append("<tr data-id=" + value.userId + "><td>" + value.userId + "</td><td>" + value.userName + "</td><td>" + value.fullName + "</td><td>" + value.gender + "</td><td>" + value.state + "</td><td>" + value.city + "</td><td>" + value.street + "</td><td>" + value.zipCode + "</td><td>" + value.birthDate + "</td><td>" + value.email + "</td>    <td><a href=\"#\" class=\"btn btn-info btn-xs\"><i class=\"fa fa-pencil\"></i> Edit </a><a href=\"#\" class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash-o\"></i> Delete </a></td></tr>");
+
+        console.log(value.state);
+        $("#datatable-responsive2").find('tbody').append("<tr data-id=" + value.userId + "><td>" + value.userId + "</td><td >" + value.userName + "</td><td data-fullName=" + value.fullName + " >" + value.fullName + "</td><td >" + value.gender + "</td><td data-states="+ value.state +">" + value.state + "</td><td data-city="+  value.city +">" + value.city + "</td><td data-street= "+  value.street +" >" + value.street + "</td><td data-zipcode="+  value.zipcode +">" + value.zipCode + "</td><td data-birthdate="+  value.birthDate +">" + value.birthDate + "</td><td >" + value.email + "</td>    <td     ><button data-name="+ value.userName +"  data-fullName=" + value.fullName + " data-gender="+ value.gender +" data-states= "+ value.state +" data-city="+ value.city +"  data-street= "+  value.street +" data-zipcode="+  value.zipcode +" data-birthdate="+  value.birthDate +" data-email="+  value.email +"     data-id=" + value.userId + " class=\"edit btn btn-info btn-xs\"><i class=\"fa fa-pencil\"></i> Edit </button><button type='button' data-name="+ value.userName +" data-fullName="+ value.fullName +" data-gender="+ value.gender +" data-states="+ value.state +" data-city="+  value.city +" data-street="+  value.street +" data-zipcode="+  value.zipcode +" data-birthdate="+  value.birthDate +" data-email="+  value.email +"      data-id="+ value.userId +" id=\"btnDelete\"  class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash-o\"></i> Delete </button></td></tr>");
     });
     $("#datatable-responsive2").DataTable();
 }
 function displayfail() {
 
-    alert("Something Wrong");
+    swal("Sorry", "Something went wrong", "error");
 }
 
 
@@ -58,9 +130,8 @@ var birthdate=$("#birthdate").val()
         }
     }).done(function (){
 
+        swal("Perfect!", "Your User is updated!", "success");
         getUsers();
-
-        alert("Added");
     }).always(function() {
         $('#ajax-loader').hide();
     });

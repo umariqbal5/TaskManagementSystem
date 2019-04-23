@@ -33,10 +33,12 @@ public class usersServlet extends HttpServlet {
         String state = request.getParameter("state");
         String city = request.getParameter("city");
         String role =  request.getParameter("role");
-        User user  = new User(userName, password, "", fullName, role, state, city, "", 00000);
+        System.out.println(gender);
+        User user  = new User(userName, password, "", fullName, role, state, city, "", 00000,gender);
 
         if (userDao.getUser(userName) != null) {
             try {
+                System.out.println("update function");
                 userDao.updateUser(user);
             } catch (SQLException | ClassNotFoundException e) {
                 e.printStackTrace();
