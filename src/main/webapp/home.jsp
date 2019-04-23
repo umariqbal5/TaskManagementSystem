@@ -39,6 +39,11 @@
 </head>
 
 <body class="nav-md">
+<%
+    response.setHeader("Cache-Control", "no-cache,no-store ,must-revalidate"); //HHTP1.1
+    response.setHeader("Pragma", "no-cache"); //HTTP 1.0
+    response.setHeader("Expires", "0"); //Proxies
+%>
 <div class="container body">
   <div class="main_container">
     <div class="col-md-3 left_col">

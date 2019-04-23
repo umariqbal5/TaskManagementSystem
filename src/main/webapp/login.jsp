@@ -41,10 +41,10 @@
                         <input name="password" type="password" class="form-control" placeholder="Password" required="" value="${password}"/>
                     </div>
                     <div>
-                        <div style="text-align: left">
-                            <input  name="rememberMe" type="checkbox" value="rememberMe"> Remember me
-                        </div>
-                        <br>
+<%--                        <div style="text-align: left">--%>
+<%--                            <input  name="rememberMe" type="checkbox" value="rememberMe"> Remember me--%>
+<%--                        </div>--%>
+<%--                        <br>--%>
                         <input style="margin-left: 140px" class="btn btn-default submit" type="submit" value="Login">
                         
                     </div>
@@ -59,7 +59,7 @@
 
                         <div>
                             <h1><i class="fa fa-paw"></i> WAP Project</h1>
-                            <p>©2019 All Rights Reserved. Privacy and Terms</p>
+                            <p>ï¿½2019 All Rights Reserved. Privacy and Terms</p>
                         </div>
                     </div>
                 </form>

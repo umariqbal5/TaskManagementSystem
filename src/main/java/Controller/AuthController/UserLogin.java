@@ -25,13 +25,13 @@ public class UserLogin extends HttpServlet {
         String password = request.getParameter("password");
         String rememberMe = request.getParameter("rememberMe");
         User user = userDao.getUser(userName);
-        String Teams = userDao.getUserTeams(user.getUserId().toString());
         if (user == null) {
             System.out.println("User not existed");
             request.setAttribute("errors", "Username is not existed");
             request.getRequestDispatcher("login.jsp").forward(request, response);
             return;
         }
+        String Teams = userDao.getUserTeams(user.getUserId().toString());
         if (user.getPassWord().equals(password)) {
             System.out.println("Login Success");
             //get the old session and invalidate

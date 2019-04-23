@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <title>Info Windows</title>
+    <title>About Us</title>
     <style>
         /* Always set the map height explicitly to define the size of the div
          * element that contains the map. */
@@ -33,7 +33,7 @@
         var address4 = {lat: 31.9522, lng: 35.2332};
         var map = new google.maps.Map(document.getElementById('map'), {
             zoom: 4,
-            center: address1
+            center: address2
         });
 
         var contentString1 = '' +
