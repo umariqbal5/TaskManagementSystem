@@ -243,9 +243,10 @@
   <!-- Custom Theme Scripts -->
   <script src="build/js/custom.min.js"></script>
   <!-- Initialize datetimepicker -->
-  <script>
-      $('#myDatepicker').datetimepicker({format: 'MM/DD/YYYY'});
-  </script>
+<script>
+    $('#myDatepicker').datetimepicker({format: 'MM/DD/YYYY',
+        minDate: new Date()});
+</script>
 
 <script type="text/javascript" src="controller/tasks.js"></script>
 
