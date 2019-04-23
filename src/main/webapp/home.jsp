@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,10 +31,7 @@
   <link href="vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 
   <!-- PNotify -->
-  <link href="vendors/pnotify/dist/pnotify.css" rel="stylesheet">
-  <link href="vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
-  <link href="vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
-
+  <link href="vendors/pnotify/pnotify.custom.min.css" media="all" rel="stylesheet" type="text/css" />
 
   <!-- Custom Theme Style -->
   <link href="build/css/custom.min.css" rel="stylesheet">
@@ -41,6 +39,11 @@
 </head>
 
 <body class="nav-md">
+<%
+    response.setHeader("Cache-Control", "no-cache,no-store ,must-revalidate"); //HHTP1.1
+    response.setHeader("Pragma", "no-cache"); //HTTP 1.0
+    response.setHeader("Expires", "0"); //Proxies
+%>
 <div class="container body">
   <div class="main_container">
     <div class="col-md-3 left_col">
@@ -75,9 +78,8 @@
           <div class="title_left">
           </div>
           <div class="clearfix"></div>
-
           <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-12 col-sm-12 col-xs-12 ${ userRole.equals('developer')?'hidden':''} ${ userRole.equals('admin')?'hidden':''}">
               <div class="x_panel">
                 <div class="x_title">
                   <h2>Task</h2>
@@ -90,7 +92,11 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Name <span class="required">*</span>
                       </label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
-                      <input type="hidden" id="id"/>
+                      	<input type="hidden" id="id"/>
+                      	<input type="hidden" id="role" value="${userRole}"/>
+                      	<input type="hidden" id="loggedUserId" value="${userId}"/>
+                      	<input type="hidden" id="loggedUserName" value="${userName}"/>
+                      	<input type="hidden" id="loggedUserTeams" value='${userTeams}'/>
                         <input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="Task Name" required="required" type="text">
                       </div>
                     </div>
@@ -120,7 +126,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Assign to</label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <select class="form-control" id="user">
-                          <option>Select User</option>
+                          <option value="" sel>Select User</option>
                           <option value="user1">User1</option>
                           <option value="user2">User2</option>
                         </select>
@@ -131,9 +137,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Assign to Team</label>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <select class="form-control" id="team">
-                          <option>Select Team</option>
-                          <option value="team2">Team 2</option>
-                          <option value="team3">Team 3</option>
+                          <option value="">Select Team</option>
                         </select>
                       </div>
                     </div>
@@ -142,7 +146,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Due Date <span class="required"> *</span>
                       </label>
                       <div class='col-md-6 col-sm-6 col-xs-12 input-group date' id='myDatepicker'>
-                        <input type='text' class="form-control" id="duedate"/>
+                        <input type='text' class="form-control" id="duedate" required/>
                         <span class="input-group-addon">
 								   <span class="glyphicon glyphicon-calendar"></span>
 								</span>
@@ -160,6 +164,7 @@
                 </div>
               </div>
             </div>
+            
             <div class="col-md-12 col-sm-12 col-xs-12">
               <div class="x_panel">
                 <div class="x_title">
@@ -167,7 +172,7 @@
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                  <table id="datatable-responsive2" class="table table-striped table-bordered dt-responsive " cellspacing="0" width="100%">
+                  <table id="datatable-responsive2" class="table table-striped table-bordered dt-responsive "cellspacing="0" width="100%">
                     <thead>
                     <tr>
                       <th>Name</th>
@@ -227,9 +232,8 @@
   <script src="vendors/pdfmake/build/pdfmake.min.js"></script>
   <script src="vendors/pdfmake/build/vfs_fonts.js"></script>
   <!-- PNotify -->
-  <script src="vendors/pnotify/dist/pnotify.js" type="5c2ea6151e4c131cbc033947-text/javascript"></script>
-  <script src="vendors/pnotify/dist/pnotify.buttons.js" type="5c2ea6151e4c131cbc033947-text/javascript"></script>
-  <script src="vendors/pnotify/dist/pnotify.nonblock.js" type="5c2ea6151e4c131cbc033947-text/javascript"></script>
+  <script type="text/javascript" src="vendors/pnotify/pnotify.custom.min.js"></script>
+  
   <!-- bootstrap-daterangepicker -->
   <script src="vendors/moment/min/moment.min.js"></script>
   <!-- bootstrap-datetimepicker -->

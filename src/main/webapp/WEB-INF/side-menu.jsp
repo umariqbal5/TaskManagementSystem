@@ -11,8 +11,8 @@
         <img src="images/img2.jpg" alt="..." class="img-circle profile_img">
     </div>
     <div class="profile_info">
-        <span>Welcome,</span>
-        <h2>${cookie['loginUser'].getValue()}</h2>
+        <span>Welcome, <%=session.getAttribute("userRole") %></span>
+        <span class="label label-info" style="color:white;font-size: 0.8em;"><%=session.getAttribute("userTeams") %></span>
     </div>
 </div>
 <!-- /menu profile quick info -->
@@ -21,12 +21,27 @@
 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
     <div class="menu_section">
         <h3>General</h3>
+        <% if(session.getAttribute("userRole").equals("admin")){ %>
         <ul class="nav side-menu">
-            <li><a><i class="fa fa-home"></i> Tasks</a>
-            <li><a><i class="fa fa-user"></i> Users</a>
-            </li>
-
+            <li><a href="<%= request.getContextPath() %>/home.jsp"><i class="fa fa-home"></i> Tasks</a></li>
+         	<li><a href="<%= request.getContextPath() %>/users.jsp"><i class="fa fa-user"></i> Users</a></li>
+         	<li><a href="<%= request.getContextPath() %>/aboutus.jsp"><i class="fa fa-user"></i>ABOUT US</a></li>
         </ul>
+        <%} %>
+        <% if(session.getAttribute("userRole").equals("manager")){ %>
+        <ul class="nav side-menu">
+            <li><a href="<%= request.getContextPath() %>/home.jsp"><i class="fa fa-home"></i> Tasks</a></li>
+            <li><a href="<%= request.getContextPath() %>/teams.jsp"><i class="fa fa-user"></i> Teams</a></li>
+            <li><a href="<%= request.getContextPath() %>/aboutus.jsp"><i class="fa fa-user"></i>ABOUT US</a></li>
+        </ul>
+        <%} %>
+        <% if(session.getAttribute("userRole").equals("developer")){ %>
+        <ul class="nav side-menu">
+            <li><a href="<%= request.getContextPath() %>/home.jsp"><i class="fa fa-home"></i> Tasks</a></li>
+            <li><a href="<%= request.getContextPath() %>/aboutus.jsp"><i class="fa fa-user"></i>ABOUT US</a></li>
+        </ul>
+        <%} %>
+        
     </div>
 </div>
 
