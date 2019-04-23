@@ -4,12 +4,12 @@ $(function() {
     $("#save").click(addTask);
     $("#cancel").click(onCancel);
     $("#datatable-responsive2").on('click','.edit',onUpdate);
-    $("#datatable-responsive2").on('click','#changestatus',onChangeStatus);
     $("#datatable-responsive2").on('click','#btnDelete',deleteTask);
+    $("#datatable-responsive2").on('click','#changestatus', onChangeStatus);
     
-   
-    getTasks();
     getAllDevelopers();
+    getTasks();
+    getAllTeams();
 });
 
 function addTask(){
@@ -21,6 +21,25 @@ function addTask(){
     var user = $("#user").children("option:selected").val();
     var team = $("#team").children("option:selected").val();
     var dueDate = $("#duedate").val();
+    
+    if(!name){
+    	$("#name").focus();
+    	new PNotify({
+    	    title: 'Oh No!',
+    	    text: 'Please add Name.',
+    	    type: 'error'
+    	});
+    	return false;
+    }
+    if(!dueDate){
+    	$("#duedate").focus();
+    	new PNotify({
+    	    title: 'Oh No!',
+    	    text: 'Please add Due Date.',
+    	    type: 'error'
+    	});
+    	return false;
+    }
     
     $('#ajax-loader').show();
 
@@ -41,8 +60,7 @@ function addTask(){
             new PNotify({
                 title: 'Added Successsfully',
                 text: 'Task Added!',
-                type: 'success',
-                styling: 'bootstrap3'
+                type: 'success'
             });
             onCancel();
             
@@ -131,16 +149,17 @@ function getTasks(){
     });
 }
 
+var userList=null;
 function getAllDevelopers() {
     $.get("getdevelopers").done(function(response){
-        var userList = response;
+        userList = response;
 
         if(userList && userList.length){
             $('#user').children('option').remove();
 
             $.each(userList, function (i, item) {
                  $('#user').append($('<option>', {
-                     value: item.userId,
+                     value: item.userName,
                      text: item.fullName
                  }))
             });
@@ -151,7 +170,21 @@ function getAllDevelopers() {
 }
 
 function getAllTeams() {
-    $.get("teams").done();
+    $.get("getteams").done(function(response){
+        var teamList = response;
+
+        if(teamList && teamList.length){
+//            $('#team').children('option').remove();
+
+            $.each(teamList, function (i, item) {
+                 $('#team').append($('<option>', {
+                     value: item.teamName,
+                     text: item.teamName
+                 }))
+            });
+        }
+
+    });
 
 }
 
@@ -176,17 +209,33 @@ function onUpdate(){
 
 function onCancel(){
 	$('#id').val("");
-	$('#category').val("");
-	$('#priority').val("");
-	$('#user').val("");
 	$('#team').val("");
 	$('#duedate').val("");
 	$('#name').val("");
 }
 
 function onChangeStatus(){
-	let id = $(this).attr("data-id");
-	alert("onChangeStatus Called "+id);
+	 let id = $(this).attr("data-id");
+	 if(id){
+		 $('#ajax-loader').show();
+		 
+		    $.ajax("updatetaskstatus", {
+		        "type": "post",
+		        "data": {
+		            "Id": id
+		        }
+		    }).done(function (response) {
+		        getTasks();
+		        new PNotify({
+	                title: 'Status changed Successsfully',
+	                text: 'Mark as Done!',
+	                type: 'success',
+	                styling: 'bootstrap3'
+	            });
+		    }).always(function () {
+		        $('#ajax-loader').hide();
+		    });
+	 }
 }
 
 function deleteTask(){
@@ -220,20 +269,33 @@ function deleteTask(){
 
 function checkUser(AssignedTo, AssignedToTeam, status){
     if(status=="COMPLETED" || status=="completed" ) return "hidden";
-
+    
+    var res="hidden";
+    
 	let role = $('#role').val();
-	let loggedUserId = $('#loggedUserId').val();
-	
 	if(role!="developer") return "hidden";
 	
-	if(loggedUserId == AssignedTo){
-		return "";
-	}else{
-		return "hidden";
+	
+	let loggedUserName = $('#loggedUserName').val();
+	let loggedUserTeams = $('#loggedUserTeams').val();
+	if(loggedUserTeams){
+		var teams=loggedUserTeams.split(',');
 	}
 	
+	if(loggedUserName == AssignedTo){
+		res= "";
+	}else{
+		if(teams){
+			//check if Team matches
+			$.each(teams,function(i,item){
+				if(item==AssignedToTeam){
+					res = "";
+				}
+			});
+		}
 		
-		
+	}
+	return res;
 }
 
 function onOverDue(due,status) {

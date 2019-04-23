@@ -121,4 +121,19 @@ public class TaskDao {
             throw new RuntimeException(e.getMessage());
         }
     }
+    
+    public void updateTaskStatus(String id) throws ClassNotFoundException, SQLException {
+        String query = "UPDATE TASK SET STATUS ='COMPLETED' WHERE TASKID=?";
+        try (Connection connection = Mysql.getMysqlConnection()) {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, Integer.valueOf(id));
+            int res = ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println("Exception thrown in updating task status ");
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
 }

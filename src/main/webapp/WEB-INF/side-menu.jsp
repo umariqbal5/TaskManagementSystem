@@ -12,7 +12,7 @@
     </div>
     <div class="profile_info">
         <span>Welcome, <%=session.getAttribute("userRole") %></span>
-        <h2></h2>
+        <span class="label label-info" style="color:white;font-size: 0.8em;"><%=session.getAttribute("userTeams") %></span>
     </div>
 </div>
 <!-- /menu profile quick info -->

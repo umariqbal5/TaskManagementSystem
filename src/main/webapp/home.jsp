@@ -90,6 +90,8 @@
                       	<input type="hidden" id="id"/>
                       	<input type="hidden" id="role" value="${userRole}"/>
                       	<input type="hidden" id="loggedUserId" value="${userId}"/>
+                      	<input type="hidden" id="loggedUserName" value="${userName}"/>
+                      	<input type="hidden" id="loggedUserTeams" value='${userTeams}'/>
                         <input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" placeholder="Task Name" required="required" type="text">
                       </div>
                     </div>
@@ -131,8 +133,6 @@
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <select class="form-control" id="team">
                           <option value="">Select Team</option>
-                          <option value="team2">Team 2</option>
-                          <option value="team3">Team 3</option>
                         </select>
                       </div>
                     </div>
@@ -141,7 +141,7 @@
                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">Due Date <span class="required"> *</span>
                       </label>
                       <div class='col-md-6 col-sm-6 col-xs-12 input-group date' id='myDatepicker'>
-                        <input type='text' class="form-control" id="duedate"/>
+                        <input type='text' class="form-control" id="duedate" required/>
                         <span class="input-group-addon">
 								   <span class="glyphicon glyphicon-calendar"></span>
 								</span>
