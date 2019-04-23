@@ -11,10 +11,6 @@
     <title>Teams </title>
 
 
-
-
-    <link href="build/css/custom.min.css" rel="stylesheet">
-    <link href="css/custom.css" rel="stylesheet">
     <!-- Bootstrap -->
     <link href="vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -109,8 +105,7 @@ f
                                         <div class="item form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Team Description <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <textarea id="teamdesc"  class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="teamdesc" placeholder="Team Description" required="required" >
-                                                </textarea>
+                                                <textarea id="teamdesc"  class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="teamdesc" placeholder="Team Description" required="required" ></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -142,13 +137,14 @@ f
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <table id="datatable-responsive2" class="table table-striped table-bordered dt-responsive " cellspacing="0" width="100%">
+                                    <table id="datatable-responsive2" class="table table-striped table-bordered dt-responsive" cellspacing="0" width="100%">
 
                                     <thead>
                                         <tr>
                                             <th>Team ID</th>
                                             <th>Team Name</th>
                                             <th>Description</th>
+                                            <th>Action</th>
 
                                         </tr>
                                         </thead>
@@ -200,9 +196,6 @@ f
 <script src="vendors/pdfmake/build/pdfmake.min.js"></script>
 <script src="vendors/pdfmake/build/vfs_fonts.js"></script>
 <!-- PNotify -->
-<script src="vendors/pnotify/dist/pnotify.js" type="5c2ea6151e4c131cbc033947-text/javascript"></script>
-<script src="vendors/pnotify/dist/pnotify.buttons.js" type="5c2ea6151e4c131cbc033947-text/javascript"></script>
-<script src="vendors/pnotify/dist/pnotify.nonblock.js" type="5c2ea6151e4c131cbc033947-text/javascript"></script>
 <!-- bootstrap-daterangepicker -->
 <script src="vendors/moment/min/moment.min.js"></script>
 <!-- bootstrap-datetimepicker -->

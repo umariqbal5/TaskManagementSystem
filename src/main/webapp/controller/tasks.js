@@ -105,7 +105,7 @@ function getTasks(){
 
 //        console.log(taskList);
         $("#datatable-responsive2").find('tbody').find("tr").remove();
-        	let show = $('#role').val()=="developer"?"hidden":"";
+        	let show = ($('#role').val()=="developer" ||  $('#role').val()=="admin")?"hidden":"";
         $.each(taskList, function(index, task){
             //OverDue Warning
             let diff = onOverDue(task.DueDate,task.Status);
@@ -114,7 +114,7 @@ function getTasks(){
             //Show hide Mark As Done Button
         	let sameUser = checkUser(task.AssignedTo, task.AssignedToTeam, task.Status);
         	
-        	let prior = task.Priority==1?"LOW":task.Priority==2?"MEDIUM":"HIGH";
+        	let prior = task.Priority==1?"1 ( LOW )":task.Priority==2?"2 ( MEDIUM )":"3 ( HIGH )";
         	$("#datatable-responsive2").find('tbody').append(
                 ' <tr>\n' +
                 '                      <td>'+task.Name+'</td>\n' +

@@ -2,11 +2,19 @@ $(function() {
 
     $("#datatable-responsive2").on('click','.edit',onUpdate);
     $("#datatable-responsive2").on('click','#btnDelete',deleteUser);
+   // $("#clear").on('click');
     $("#save").click(addUser);
+    $("#cancel").click(onCancel);
     getUsers();
 });
 
+function onCancel(){
+    $('#userId').val("");
+    $('#userName').val("");
+    $('#password').val("");
+    $('#fullName').val("");
 
+}
 function onUpdate(){
     let userid = $(this).attr("data-id");
     let username = $(this).attr("data-name");
@@ -18,6 +26,7 @@ function onUpdate(){
     let zipcode = $(this).attr("data-zipcode");
     let birthdate = $(this).attr("data-birthdate");
     let email = $(this).attr("data-email");
+    let role = $(this).attr("data-role");
 
     $('#userId').val(userid);
     $('#userName').val(username);
@@ -25,6 +34,7 @@ function onUpdate(){
     $('#gender').val(gender);
     $('#state').val(state);
     $('#city').val(city);
+    $('#role').val(role);
     $('#birthdate').val(birthdate);
 console.log("onscreen"+ $('#userName').val());
     console.log("notonscreen"+username);
@@ -92,8 +102,8 @@ function displayGuests(data) {
     $.each(object, function (index, value) {
 
 
-        console.log(value.state);
-        $("#datatable-responsive2").find('tbody').append("<tr data-id=" + value.userId + "><td>" + value.userId + "</td><td >" + value.userName + "</td><td data-fullName=" + value.fullName + " >" + value.fullName + "</td><td >" + value.gender + "</td><td data-states="+ value.state +">" + value.state + "</td><td data-city="+  value.city +">" + value.city + "</td><td data-street= "+  value.street +" >" + value.street + "</td><td data-zipcode="+  value.zipcode +">" + value.zipCode + "</td><td data-birthdate="+  value.birthDate +">" + value.birthDate + "</td><td >" + value.email + "</td>    <td     ><button data-name="+ value.userName +"  data-fullName=" + value.fullName + " data-gender="+ value.gender +" data-states= "+ value.state +" data-city="+ value.city +"  data-street= "+  value.street +" data-zipcode="+  value.zipcode +" data-birthdate="+  value.birthDate +" data-email="+  value.email +"     data-id=" + value.userId + " class=\"edit btn btn-info btn-xs\"><i class=\"fa fa-pencil\"></i> Edit </button><button type='button' data-name="+ value.userName +" data-fullName="+ value.fullName +" data-gender="+ value.gender +" data-states="+ value.state +" data-city="+  value.city +" data-street="+  value.street +" data-zipcode="+  value.zipcode +" data-birthdate="+  value.birthDate +" data-email="+  value.email +"      data-id="+ value.userId +" id=\"btnDelete\"  class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash-o\"></i> Delete </button></td></tr>");
+        console.log(value.role);
+        $("#datatable-responsive2").find('tbody').append("<tr data-id=" + value.userId + "><td>" + value.userId + "</td><td >" + value.userName + "</td><td data-fullName=" + value.fullName + " >" + value.fullName + "</td>   <td data-role=" + value.role + " >" + value.role + "</td>   <td><button data-role=" + value.role + "  data-name="+ value.userName +"  data-fullName=" + value.fullName + "  data-id=" + value.userId + " class=\"edit btn btn-info btn-xs\"><i class=\"fa fa-pencil\"></i> Edit </button><button type='button' data-role=" + value.role + "  data-name="+ value.userName +" data-fullName="+ value.fullName +"   data-id="+ value.userId +" id=\"btnDelete\"  class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash-o\"></i> Delete </button></td></tr>");
     });
     $("#datatable-responsive2").DataTable();
 }

@@ -3,10 +3,17 @@ $(function() {
     $("#save").click(addTeams);
     $("#datatable-responsive2").on('click','.edit',onUpdate);
     $("#datatable-responsive2").on('click','#btnDelete',deleteTeam);
+    $("#cancel").click(onCancel);
     getUsers();
    getTeams();
 });
 
+
+function onCancel(){
+    $('#teamname').val("");
+    $('#teamdesc').val("");
+
+}
 
 function showTeams(data) {
 
@@ -15,8 +22,9 @@ function showTeams(data) {
     $.each(object, function (index, value) {
 
         $("#datatable-responsive2").find('tbody').append("<tr  data-id=" + value.teamid + "><td>" + value.teamid + "</td><td>" + value.teamname + "</td> <td data-desc=" + value.teamdescription +">" + value.teamdescription + "</td> <td><button type='button' data-desc=" + value.teamdescription +"  data-id=" + value.teamid + " data-name=" + value.teamname + " class=\"edit btn btn-info btn-xs\"><i class=\"fa fa-pencil\"></i> Edit </button><button   data-id=" + value.teamid + " id=\"btnDelete\" class=\"btn btn-danger btn-xs\"><i class=\"fa fa-trash-o\"></i> Delete </button></td></tr>");
+
     });
-    $("#datatable-responsive2").DataTable();
+    // $("#datatable-responsive2").DataTable();
 }
 
 function showTeamsfail() {

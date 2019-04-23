@@ -114,53 +114,53 @@
                                             </div>
                                         </div>
 
-                                        <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender</label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <select class="form-control" id="gender">
-                                                    <option value="">Select Gender</option>
-                                                    <option value="female">Female</option>
-                                                    <option value="male">Male</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Country</label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <select class="form-control" id="country">
-                                                    <option value="">Select Country</option>
-                                                    <option value="us">US</option>
-                                                    <option value="pa">Palestine</option>
-                                                    <option value="pk">Pakistan</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">State</label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input id="state"   class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="State" placeholder="State" required="required" >
+<%--                                        <div class="item form-group">--%>
+<%--                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender</label>--%>
+<%--                                            <div class="col-md-6 col-sm-6 col-xs-12">--%>
+<%--                                                <select class="form-control" id="gender">--%>
+<%--                                                    <option value="">Select Gender</option>--%>
+<%--                                                    <option value="female">Female</option>--%>
+<%--                                                    <option value="male">Male</option>--%>
+<%--                                                </select>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                        <div class="item form-group">--%>
+<%--                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Country</label>--%>
+<%--                                            <div class="col-md-6 col-sm-6 col-xs-12">--%>
+<%--                                                <select class="form-control" id="country">--%>
+<%--                                                    <option value="">Select Country</option>--%>
+<%--                                                    <option value="us">US</option>--%>
+<%--                                                    <option value="pa">Palestine</option>--%>
+<%--                                                    <option value="pk">Pakistan</option>--%>
+<%--                                                </select>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                        <div class="item form-group">--%>
+<%--                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">State</label>--%>
+<%--                                            <div class="col-md-6 col-sm-6 col-xs-12">--%>
+<%--                                                <input id="state"   class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="State" placeholder="State" required="required" >--%>
 
 
-                                            </div>
-                                        </div>
-                                        <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">City</label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input id="city"   class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="City" placeholder="City" required="required" >
+<%--                                            </div>--%>
+<%--                                        </div>--%>
+<%--                                        <div class="item form-group">--%>
+<%--                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">City</label>--%>
+<%--                                            <div class="col-md-6 col-sm-6 col-xs-12">--%>
+<%--                                                <input id="city"   class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="City" placeholder="City" required="required" >--%>
 
-                                            </div>
-                                        </div>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
 
-                                        <div class="item form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myDatepicker">Birth Date <span class="required"> *</span>
-                                            </label>
-                                            <div class='col-md-6 col-sm-6 col-xs-12 input-group date' id='myDatepicker'>
-                                                <input id="birthdate" type='text' class="form-control" />
-                                                <span class="input-group-addon">
-								   <span class="glyphicon glyphicon-calendar"></span>
-								</span>
-                                            </div>
-                                        </div>
+<%--                                        <div class="item form-group">--%>
+<%--                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="myDatepicker">Birth Date <span class="required"> *</span>--%>
+<%--                                            </label>--%>
+<%--                                            <div class='col-md-6 col-sm-6 col-xs-12 input-group date' id='myDatepicker'>--%>
+<%--                                                <input id="birthdate" type='text' class="form-control" />--%>
+<%--                                                <span class="input-group-addon">--%>
+<%--								   <span class="glyphicon glyphicon-calendar"></span>--%>
+<%--								</span>--%>
+<%--                                            </div>--%>
+<%--                                        </div>--%>
 
                                         <div class="item form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Role</label>
@@ -176,7 +176,7 @@
                                         <div class="ln_solid"></div>
                                         <div class="form-group">
                                             <div class="col-md-6 col-md-offset-3">
-                                                <button type="button" id="clear" class="btn btn-primary">Clear</button>
+                                                <button type="button" id="cancel" class="btn btn-primary">Clear</button>
                                                 <button id="save" type="button" class="btn btn-success">Save</button>
                                             </div>
                                         </div>
@@ -198,13 +198,13 @@
                                             <th>User ID</th>
                                             <th>User Name</th>
                                             <th>Full Name</th>
-                                            <th>Gender</th>
-                                            <th>State</th>
-                                            <th>City</th>
-                                            <th>Street</th>
-                                            <th>Zip Code</th>
-                                            <th>Birth Date</th>
-                                            <th>Email</th>
+                                            <th>Role</th>
+<%--                                            <th>State</th>--%>
+<%--                                            <th>City</th>--%>
+<%--                                            <th>Street</th>--%>
+<%--                                            <th>Zip Code</th>--%>
+<%--                                            <th>Birth Date</th>--%>
+<%--                                            <th>Email</th>--%>
                                             <th>Action</th>
                                         </tr>
                                         </thead>
