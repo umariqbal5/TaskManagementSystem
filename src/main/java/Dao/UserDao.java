@@ -2,10 +2,12 @@ package Dao;
 
 import Config.Mysql;
 import Model.Role;
+import Model.Team;
 import Model.User;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class UserDao {
     public void saveUser(User user) throws ClassNotFoundException, SQLException {
@@ -137,7 +139,6 @@ public class UserDao {
         return user;
     }
 
-
     public static void deleteUser(int UserId) throws ClassNotFoundException, SQLException {
         String query = "DELETE FROM USER WHERE USERID=?";
 System.out.println("test"+UserId);
@@ -158,5 +159,71 @@ System.out.println("test"+UserId);
         }
     }
 
-
+    public  ArrayList<User> getUsersList() {
+        String query = "SELECT USERID,USERNAME,FULLNAME,ROLE from USER WHERE ROLE='developer'";
+        ArrayList<User> AllUsers=new ArrayList<>();
+        User user = null;
+        try (Connection con = Mysql.getMysqlConnection(); Statement stmt = con.createStatement()) {
+            System.out.println("the query: " + query);
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                int userid=Integer.parseInt(rs.getString("USERID"));
+                String userName = rs.getString("USERNAME");
+                String fullName = rs.getString("FULLNAME");
+                String role = rs.getString("ROLE");
+                user = new User(userid,userName, "", "", fullName, "", "", "", 00000,null,role,"");
+                AllUsers.add(user);
+            }
+            stmt.close();
+        } catch (SQLException s) {
+            System.out.println("Exception thrown in retrieve User List ....");
+            s.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        return AllUsers;
+    }
+    
+    public  String getUserTeams(String userId) {
+        String query = "SELECT TEAMS.TEAMNAME FROM TEAMUSER  JOIN TEAMS ON TEAMS.TEAMID= TEAMUSER.TEAMID WHERE USERID='"+userId+"'";
+        String AllTeams="";
+        try (Connection con = Mysql.getMysqlConnection(); Statement stmt = con.createStatement()) {
+            System.out.println("the query: " + query);
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+            	AllTeams += rs.getString("TEAMNAME")+",";
+            }
+            stmt.close();
+        } catch (SQLException s) {
+            System.out.println("Exception thrown in retrieve User List ....");
+            s.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        return AllTeams;
+    }
+    
+    public  ArrayList<Team> getTeamsList() {
+        String query = "SELECT * from TEAMS";
+        ArrayList<Team> AllTeams=new ArrayList<>();
+        Team team = null;
+        try (Connection con = Mysql.getMysqlConnection(); Statement stmt = con.createStatement()) {
+            System.out.println("the query: " + query);
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                int userid=Integer.parseInt(rs.getString("TEAMID"));
+                String userName = rs.getString("TEAMNAME");
+                
+                team = new Team(userid,userName);
+                AllTeams.add(team);
+            }
+            stmt.close();
+        } catch (SQLException s) {
+            System.out.println("Exception thrown in retrieve team List ....");
+            s.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        return AllTeams;
+    }
 }

@@ -33,9 +33,7 @@
     <link href="vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
 
     <!-- PNotify -->
-    <link href="vendors/pnotify/dist/pnotify.css" rel="stylesheet">
-    <link href="vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
-    <link href="vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+    <link href="vendors/pnotify/pnotify.custom.min.css" media="all" rel="stylesheet" type="text/css" />
 
 
     <!-- Custom Theme Style -->
@@ -67,7 +65,7 @@
         <!-- top navigation -->
         <jsp:include page="WEB-INF/header.jsp"></jsp:include>
         <!-- /top navigation -->
-
+        
         <!-- page content -->
         <div class="right_col" role="main">
             <div class="ajax-loader" id="ajax-loader">
@@ -258,9 +256,7 @@
 <script src="vendors/pdfmake/build/pdfmake.min.js"></script>
 <script src="vendors/pdfmake/build/vfs_fonts.js"></script>
 <!-- PNotify -->
-<script src="vendors/pnotify/dist/pnotify.js" type="5c2ea6151e4c131cbc033947-text/javascript"></script>
-<script src="vendors/pnotify/dist/pnotify.buttons.js" type="5c2ea6151e4c131cbc033947-text/javascript"></script>
-<script src="vendors/pnotify/dist/pnotify.nonblock.js" type="5c2ea6151e4c131cbc033947-text/javascript"></script>
+<script type="text/javascript" src="vendors/pnotify/pnotify.custom.min.js"></script>
 <!-- bootstrap-daterangepicker -->
 <script src="vendors/moment/min/moment.min.js"></script>
 <!-- bootstrap-datetimepicker -->

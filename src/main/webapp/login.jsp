@@ -46,22 +46,20 @@
                         </div>
                         <br>
                         <input style="margin-left: 140px" class="btn btn-default submit" type="submit" value="Login">
-                        <a class="reset_pass" href="#">Lost your password?</a>
+                        
                     </div>
 
                     <div class="clearfix"></div>
 
                     <div class="separator">
-                        <p class="change_link">New to site?
-                            <a href="#signup" class="to_register"> Create Account </a>
-                        </p>
+                       
 
                         <div class="clearfix"></div>
                         <br />
 
                         <div>
                             <h1><i class="fa fa-paw"></i> WAP Project</h1>
-                            <p>Â©2019 All Rights Reserved. Privacy and Terms</p>
+                            <p>©2019 All Rights Reserved. Privacy and Terms</p>
                         </div>
                     </div>
                 </form>

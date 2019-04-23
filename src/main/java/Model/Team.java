@@ -14,6 +14,12 @@ public class Team {
     {
 
     }
+    public Team(String teamId, String teamName)
+    {
+
+        this.teamid=teamId;
+        this.teamname=teamName;
+    }
     public Team(String teamname, String teamdescription)
     {
 
