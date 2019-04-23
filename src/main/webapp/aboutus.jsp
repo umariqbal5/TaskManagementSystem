@@ -58,7 +58,7 @@
             '<p>Name: Hisham Quandil</p>' +
             '<p>Country: Palestine</p>' +
             '<p>Email:hishma.qandil@mum.edu </p>'+
-            '<img width="100" height="100" src="images/user.png">';
+            '<img width="100" height="100" src="images/hisham.jpg">';
 
         var infowindow1 = new google.maps.InfoWindow({
             content: contentString1
