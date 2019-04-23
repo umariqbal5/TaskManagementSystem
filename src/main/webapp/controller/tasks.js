@@ -9,6 +9,7 @@ $(function() {
     
     getAllDevelopers();
     getTasks();
+    getAllTeams();
 });
 
 function addTask(){
@@ -20,6 +21,25 @@ function addTask(){
     var user = $("#user").children("option:selected").val();
     var team = $("#team").children("option:selected").val();
     var dueDate = $("#duedate").val();
+    
+    if(!name){
+    	$("#name").focus();
+    	new PNotify({
+    	    title: 'Oh No!',
+    	    text: 'Please add Name.',
+    	    type: 'error'
+    	});
+    	return false;
+    }
+    if(!dueDate){
+    	$("#duedate").focus();
+    	new PNotify({
+    	    title: 'Oh No!',
+    	    text: 'Please add Due Date.',
+    	    type: 'error'
+    	});
+    	return false;
+    }
     
     $('#ajax-loader').show();
 
@@ -40,8 +60,7 @@ function addTask(){
             new PNotify({
                 title: 'Added Successsfully',
                 text: 'Task Added!',
-                type: 'success',
-                styling: 'bootstrap3'
+                type: 'success'
             });
             onCancel();
             
@@ -151,7 +170,21 @@ function getAllDevelopers() {
 }
 
 function getAllTeams() {
-    $.get("teams").done();
+    $.get("getteams").done(function(response){
+        var teamList = response;
+
+        if(teamList && teamList.length){
+//            $('#team').children('option').remove();
+
+            $.each(teamList, function (i, item) {
+                 $('#team').append($('<option>', {
+                     value: item.teamName,
+                     text: item.teamName
+                 }))
+            });
+        }
+
+    });
 
 }
 
@@ -176,8 +209,6 @@ function onUpdate(){
 
 function onCancel(){
 	$('#id').val("");
-	$('#category').val("");
-	$('#priority').val("");
 	$('#team').val("");
 	$('#duedate').val("");
 	$('#name').val("");

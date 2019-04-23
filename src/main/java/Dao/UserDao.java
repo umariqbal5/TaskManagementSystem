@@ -2,6 +2,7 @@ package Dao;
 
 import Config.Mysql;
 import Model.Role;
+import Model.Team;
 import Model.User;
 
 import java.sql.*;
@@ -169,6 +170,30 @@ public class UserDao {
             stmt.close();
         } catch (SQLException s) {
             System.out.println("Exception thrown in retrieve User List ....");
+            s.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+        return AllTeams;
+    }
+    
+    public  ArrayList<Team> getTeamsList() {
+        String query = "SELECT * from TEAMS";
+        ArrayList<Team> AllTeams=new ArrayList<>();
+        Team team = null;
+        try (Connection con = Mysql.getMysqlConnection(); Statement stmt = con.createStatement()) {
+            System.out.println("the query: " + query);
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                int userid=Integer.parseInt(rs.getString("TEAMID"));
+                String userName = rs.getString("TEAMNAME");
+                
+                team = new Team(userid,userName);
+                AllTeams.add(team);
+            }
+            stmt.close();
+        } catch (SQLException s) {
+            System.out.println("Exception thrown in retrieve team List ....");
             s.printStackTrace();
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e.getMessage());
