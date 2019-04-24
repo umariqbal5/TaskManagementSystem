@@ -244,7 +244,10 @@
   <script src="build/js/custom.min.js"></script>
   <!-- Initialize datetimepicker -->
   <script>
-      $('#myDatepicker').datetimepicker({format: 'MM/DD/YYYY'});
+    var date = new Date();
+    date.setDate(date.getDate()-1);
+      $('#myDatepicker').datetimepicker({format: 'MM/DD/YYYY',
+        startDate: date});
   </script>
 
 <script type="text/javascript" src="controller/tasks.js"></script>
